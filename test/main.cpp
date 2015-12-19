@@ -118,20 +118,20 @@ std::vector<int> NavMesh::GetNeighbors(int nodeIndex)
 
 int main(int argc, char* argv[])
 {
-	NavMesh navmesh;
+	std::shared_ptr<NavMesh> navmesh = std::make_shared<NavMesh>();
 
-	FindPathEngine engine(&navmesh);
+	FindPathEngine engine(navmesh);
 
-	FindPathEngine::Ticket ticket(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 6));
+	std::shared_ptr<FindPathEngine::Ticket> ticket = std::make_shared<FindPathEngine::Ticket>(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 6));
 
-	engine.AddTicket(&ticket);
+	engine.AddTicket(ticket);
 
 	while (!engine.Update())
 	{
 
 	}
 
-	for (auto& nodeIndex : ticket.m_pathFound)
+	for (auto& nodeIndex : ticket->m_pathFound)
 	{
 		std::cout << "result " << nodeIndex << " " << (nodeIndex % NavMesh::k_w) << "x" << (nodeIndex / NavMesh::k_w) << std::endl;
 	}

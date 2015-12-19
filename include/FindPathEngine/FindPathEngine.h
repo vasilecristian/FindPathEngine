@@ -39,13 +39,13 @@ public:
 /** This is the Main class that implemnts the generic A * (A star) search algorithm.
 * How to use it:
 * // ------------------
-* NavMesh navmesh;
+* std::shared_ptr<NavMesh> navmesh = std::make_shared<NavMesh>();
 *
-* FindPathEngine engine(&navmesh);
+* FindPathEngine engine(navmesh);
 *
-* FindPathEngine::Ticket ticket(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 6));
+* std::shared_ptr<FindPathEngine::Ticket> ticket = std::make_shared<FindPathEngine::Ticket>(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 6));
 *
-* engine.AddTicket(&ticket);
+* engine.AddTicket(ticket);
 * 
 * while (!engine.Update())
 * {
@@ -62,7 +62,7 @@ public:
 
 	/** The constructor.
 	* @param navMesh is a pointer to the user's navmesh class.*/
-	FindPathEngine(NavMeshBase* navMesh);
+	FindPathEngine(std::shared_ptr<NavMeshBase> navMesh);
 
 	/** This is a ticket used to describe a find path request.*/
 	struct Ticket
@@ -95,7 +95,7 @@ public:
 		int m_startIndex;
 
 		/** Cuttent node processed */
-		Node* m_current;
+		std::shared_ptr<Node> m_current;
 
 		/** The status of the ticket */
 		State m_state;
@@ -107,15 +107,15 @@ public:
 		std::vector<int> m_pathFound;
 
 		/** Is the list with possible/available nodes to check.*/
-		std::map<int, Node*> m_openList;
+		std::map<int, std::shared_ptr<Node>> m_openList;
 
 		/** Is the list with nodes already checked. */
-		std::map<int, Node*> m_closedList;
+		std::map<int, std::shared_ptr<Node>> m_closedList;
 
 	};
 
 	/** Add a new request to determine a path */
-	void AddTicket(Ticket* ticket);
+	void AddTicket(std::shared_ptr<Ticket> ticket);
 
 	/** This function will run and process every Ticket. 
 	* If a ticket is solved (aka the path was found, or there is not solution) just remove the 
@@ -147,7 +147,7 @@ private:
 		int m_index;
 
 		/** This is the parent node*/
-		Node* m_parent;
+		std::shared_ptr<Node> m_parent;
 
 		/** This is the cost to move to this tile. Is called also "G" value. This
 		* must be a sum of parent cost and the cost to move to this node starting from parent.
@@ -169,15 +169,15 @@ private:
 
 
 	/** Is a pointer to the used's nav mesh. */
-	NavMeshBase* m_navMesh;
+	std::shared_ptr<NavMeshBase> m_navMesh;
 
 	
 	/** Update a ticket (aka a search request). This will make another step forward 
 	* to search the path.
 	* @param ticket is the request processed
 	* @return true if the job is finished. Return false if the job need to be processed also at the next step.*/
-	bool ProcessTicket(Ticket* ticket);
+	bool ProcessTicket(std::shared_ptr<Ticket> ticket);
 
 	/** Is a list with tickets that must be processed. */
-	std::vector<Ticket*> m_tickets;
+	std::vector<std::shared_ptr<Ticket> > m_tickets;
 };

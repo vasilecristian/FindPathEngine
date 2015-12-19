@@ -11,7 +11,7 @@
 
 
 
-FindPathEngine::FindPathEngine(NavMeshBase* navMesh) 
+FindPathEngine::FindPathEngine(std::shared_ptr<NavMeshBase> navMesh)
 	: m_navMesh(navMesh)
 {
 
@@ -27,7 +27,7 @@ FindPathEngine::Ticket::Ticket(int startIndex, int goalIndex)
 }
 
 /** Add a new request to determine a path */
-void FindPathEngine::AddTicket(Ticket* ticket)
+void FindPathEngine::AddTicket(std::shared_ptr<Ticket> ticket)
 {
 	m_tickets.push_back(ticket);
 }
@@ -49,7 +49,7 @@ bool FindPathEngine::Update()
 	return (m_tickets.size() == 0);
 }
 
-bool FindPathEngine::ProcessTicket(Ticket* ticket)
+bool FindPathEngine::ProcessTicket(std::shared_ptr<Ticket> ticket)
 {
 	ticket->m_steps++;
 
@@ -67,7 +67,7 @@ bool FindPathEngine::ProcessTicket(Ticket* ticket)
 	/// Add the start node to the closed list.
 	if (ticket->m_closedList.size() == 0)
 	{
-		Node* start = new Node(ticket->m_startIndex);
+		std::shared_ptr<Node> start = std::make_shared<Node>(ticket->m_startIndex);
 
 		/// In this case, we will add the start node.
 		start->m_parent = nullptr;
@@ -102,7 +102,7 @@ bool FindPathEngine::ProcessTicket(Ticket* ticket)
 		{
 			ticket->m_pathFound.push_back(ticket->m_goalIndex);
 
-			Node* node = ticket->m_current;
+			std::shared_ptr<Node> node = ticket->m_current;
 			do
 			{
 				ticket->m_pathFound.push_back(node->m_index);
@@ -116,7 +116,7 @@ bool FindPathEngine::ProcessTicket(Ticket* ticket)
 		}
 
 		bool addedAlready = false;
-		Node* neigh = nullptr;
+		std::shared_ptr<Node> neigh = nullptr;
 
 		/// check if is in open list
 		if (ticket->m_openList.find(neighbor) != ticket->m_openList.end())
@@ -132,7 +132,7 @@ bool FindPathEngine::ProcessTicket(Ticket* ticket)
 
 		if (!addedAlready)
 		{
-			neigh = new Node(neighbor);
+			neigh = std::make_shared<Node>(neighbor);
 			neigh->m_parent = ticket->m_current;
 		}
 
@@ -167,7 +167,7 @@ bool FindPathEngine::ProcessTicket(Ticket* ticket)
 	if (ticket->m_openList.size() == 0)
 	{
 		ticket->m_pathFound.push_back(ticket->m_goalIndex);
-		Node* node = ticket->m_current;
+		std::shared_ptr<Node> node = ticket->m_current;
 		do
 		{
 			ticket->m_pathFound.push_back(node->m_index);
