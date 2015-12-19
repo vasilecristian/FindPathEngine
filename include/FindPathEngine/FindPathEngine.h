@@ -176,9 +176,10 @@ namespace fpe
 		int GetSteps(){ return m_steps; }
 
 		/** Getter for the detected path. */
-		std::vector<int>& GetFoundPath(){ return m_pathFound; }
+		std::vector<int>& GetFoundPath();
 
-	private:
+	//private:
+	public:
 
 		/** This is the target */
 		int m_goalIndex;

@@ -6,7 +6,7 @@
 
 
 
-class NavMesh : public NavMeshBase
+class NavMesh : public fpe::NavMeshBase
 {
 public:
 	NavMesh();
@@ -29,12 +29,12 @@ public:
 const int NavMesh::k_collisions[NavMesh::k_meshSize] = {
 /*    0  1  2  3  4  5  6  7  */
 /*0*/ 1, 1, 1, 1, 1, 1, 1, 1,
-/*1*/ 1, 0, 1, 0, 0, 1, 0, 1,
-/*2*/ 1, 0, 1, 0, 1, 1, 0, 1,
-/*3*/ 1, 0, 1, 0, 1, 0, 1, 1,
-/*4*/ 1, 0, 1, 0, 1, 0, 0, 1,
-/*5*/ 1, 0, 1, 0, 1, 1, 0, 1,
-/*6*/ 1, 0, 0, 0, 1, 1, 0, 1,
+/*1*/ 1, 0, 0, 0, 0, 0, 0, 1,
+/*2*/ 1, 0, 0, 0, 0, 0, 0, 1,
+/*3*/ 1, 0, 0, 0, 0, 0, 0, 1,
+/*4*/ 1, 0, 0, 0, 0, 0, 0, 1,
+/*5*/ 1, 0, 0, 0, 0, 0, 0, 1,
+/*6*/ 1, 0, 0, 0, 0, 0, 0, 1,
 /*7*/ 1, 1, 1, 1, 1, 1, 1, 1
 };
 
@@ -51,7 +51,12 @@ int NavMesh::ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex)
 	int nodeX = nodeIndex % NavMesh::k_w;
 	int nodeY = nodeIndex / NavMesh::k_w;
 
-	return std::abs(nodeX - goalX) + std::abs(nodeY - goalY);
+	//int dx = std::abs(nodeX - goalX);
+	//int dy = std::abs(nodeY - goalY);
+	//float dist = std::sqrtf(float(dx*dx + dy*dy)) *1000;
+	int dist = std::abs(nodeX - goalX) + std::abs(nodeY - goalY);
+
+	return dist;
 }
 
 int NavMesh::ComputeCost(int nodeIndex, int neighborIndex)
@@ -120,9 +125,9 @@ int main(int argc, char* argv[])
 {
 	std::shared_ptr<NavMesh> navmesh = std::make_shared<NavMesh>();
 
-	FindPathEngine engine(navmesh);
+	fpe::FindPathEngine engine(navmesh);
 
-	std::shared_ptr<FindPathEngine::Ticket> ticket = std::make_shared<FindPathEngine::Ticket>(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 6));
+	std::shared_ptr<fpe::Ticket> ticket = std::make_shared<fpe::Ticket>(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 1));
 
 	engine.AddTicket(ticket);
 

@@ -1,6 +1,8 @@
 
 #include "FindPathEngine/FindPathEngine.h"
 
+
+
 namespace fpe
 {
 	FindPathEngine::FindPathEngine(std::shared_ptr<NavMeshBase> navMesh)
@@ -16,6 +18,12 @@ namespace fpe
 		, m_steps(0)
 	{
 	}
+
+	std::vector<int>& Ticket::GetFoundPath()
+	{ 
+		return m_pathFound;
+	}
+
 
 	/** Add a new request to determine a path */
 	void FindPathEngine::AddTicket(std::shared_ptr<Ticket> ticket)
@@ -177,20 +185,26 @@ namespace fpe
 		for (auto& on : ticket->m_openList)
 		{
 			if (on.second->m_f < f)
+			{
+				f = on.second->m_f;
 				ticket->m_current = on.second;
+			}
 		}
+
+		//std::cout << ticket->m_current->m_f << std::endl;
 
 		ticket->m_openList.erase(ticket->m_current->m_index);
 
 		ticket->m_closedList[ticket->m_current->m_index] = ticket->m_current;
 
-		//int i = 0;
-		//for (auto& on : ticket->m_openList)
-		//{
-		//	std::cout << i << " " << on.second << " " << on.first << " " << on.second->m_f << std::endl;
-		//	i++;
-		//}
-
+		/*int i = 0;
+		for (auto& on : ticket->m_openList)
+		{
+			std::cout << i << " " << on.second << " " << on.first << " " << on.first % 8 << "x" << on.first / 8 << " " << on.second->m_f << std::endl;
+			i++;
+		}
+		std::cout << "Current " << ticket->m_current << " " << ticket->m_current->m_index << " " << ticket->m_current->m_index % 8 << "x" << ticket->m_current->m_index / 8 << " " << ticket->m_current->m_f << std::endl;
+*/
 
 		return false;
 	}
