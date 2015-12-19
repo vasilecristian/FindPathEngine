@@ -7,62 +7,72 @@
 #include <iostream>
 #include <functional>
 
-
+/** This is the interface that must be implemented by user.*/
 class NavMeshBase
 {
 public:
-	virtual int ComputeGoalDistanceEstimate(NavMeshBase* navMesh, int goalNode, int node) = 0;
-	virtual int ComputeCost(NavMeshBase* navMesh, int node, int neighbor) = 0;
-	virtual std::vector<int> GetNeighbors(NavMeshBase* navMesh, int node) = 0;
+	/** Must be implemented in derived class! 
+	* This function will calculate the distance(aka the cost) to the goal.
+	* Is the Heuristic, that will return the distance from nodeIndex to goalIndex.
+	* @param goalIndex is the index of the node that represent the target.
+	* @param nodeIndex is the index of the node that you want to calculate the distance.
+	* @return the estimated distance from nodeIndex to goalIndex.*/
+	virtual int ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex) = 0;
+
+	/**  Must be implemented in derived class! 
+	* This function will calculate the movement cost from a node to a neighbor node.
+	* @param nodeIndex is the node index .
+	* @param neighborIndex is the node index .
+	* @return the cost to move from node to neighbor.*/
+	virtual int ComputeCost(int nodeIndex, int neighborIndex) = 0;
+	
+	/** Must be implemented in derived class! 
+	* Use this to get all the valid heighbod nodes. A valid node
+	* is considered a node that can be used in the path => do not return the
+	* nodes which have collision. 
+	* @param nodeIndex is the node that you want to get the neighbors for.
+	* @return a list with neighbor nodes Indexes.*/
+	virtual std::vector<int> GetNeighbors(int nodeIndex) = 0;
 };
 
 
-
-/** This is the template class used as interface.*/
-class Node
-{
-public:
-	int m_index;
-
-	/** The constructor */
-	Node(int index) : m_index(index), m_parent(nullptr), m_cost(-1), m_distToTarget(-1), m_f(-1)
-	{
-	}
-
-	/** This is the parent node*/
-	Node* m_parent;
-
-	/** This is the cost to move to this tile. Is called also "G" value. This
-	* must be a sum of parent cost and the cost to move to this node starting from parent.
-	* By default this is -1 which means that this was not calculated yet => the GetCost function
-	* will calculate it.*/
-	int m_cost;//"G"
-
-
-	/** This the distance to target. It is calculated using a heuristic. It is called also the "H" value.
-	* The function ComputeGoalDistanceEstimate will compute it.*/
-	int m_distToTarget;//"H"
-
-	/** This is a sum of "G" and "H" */
-	int m_f; // "G" + "H"
-
-	/** The list with neighbors */
-	std::vector<int> m_neighbors;
-};
-
-
-
+/** This is the Main class that implemnts the generic A * (A star) search algorithm.
+* How to use it:
+* // ------------------
+* NavMesh navmesh;
+*
+* FindPathEngine engine(&navmesh);
+*
+* FindPathEngine::Ticket ticket(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 6));
+*
+* engine.AddTicket(&ticket);
+* 
+* while (!engine.Update())
+* {
+*   /// this loop will stop when the path was found, 
+*   /// or when the path cannot be determined.
+* }
+* // ------------------*/
 class FindPathEngine
 {
+	//forward declaration
+	class Node;
+
 public:
 
+	/** The constructor.
+	* @param navMesh is a pointer to the user's navmesh class.*/
 	FindPathEngine(NavMeshBase* navMesh);
 
-	/** This is a ticket used to descrige a find path request.*/
+	/** This is a ticket used to describe a find path request.*/
 	struct Ticket
 	{
-		Ticket(int start, int goal);
+		/** The constructor.
+		* @param startIndex is the start node.
+		* @param goalIndex is the target node */
+		Ticket(int startIndex, int goalIndex);
 
+		/** Used to describe the possible states of the Ticket.*/
 		enum class State : int
 		{
 			/** The ticket waiting to be processed.*/
@@ -79,10 +89,10 @@ public:
 		};
 
 		/** This is the target */
-		int m_goal;
+		int m_goalIndex;
 
 		/** This is the start location */
-		int m_start;
+		int m_startIndex;
 
 		/** Cuttent node processed */
 		Node* m_current;
@@ -96,8 +106,10 @@ public:
 		/** The list with nodes that represent the detected path */
 		std::vector<int> m_pathFound;
 
+		/** Is the list with possible/available nodes to check.*/
 		std::map<int, Node*> m_openList;
 
+		/** Is the list with nodes already checked. */
 		std::map<int, Node*> m_closedList;
 
 	};
@@ -113,6 +125,50 @@ public:
 
 private:
 
+
+	/** This is the helper class used internally to
+	* store node's props*/
+	class Node
+	{
+	public:
+
+		/** The constructor 
+		* @param index is the index of the node.*/
+		Node(int index) 
+			: m_index(index)
+			, m_parent(nullptr)
+			, m_cost(-1)
+			, m_distToTarget(-1)
+			, m_f(-1)
+		{
+		}
+
+		/** is the index of the node.*/
+		int m_index;
+
+		/** This is the parent node*/
+		Node* m_parent;
+
+		/** This is the cost to move to this tile. Is called also "G" value. This
+		* must be a sum of parent cost and the cost to move to this node starting from parent.
+		* By default this is -1 which means that this was not calculated yet => the GetCost function
+		* will calculate it.*/
+		int m_cost;//"G"
+
+
+		/** This the distance to target. It is calculated using a heuristic. It is called also the "H" value.
+		* The function ComputeGoalDistanceEstimate will compute it.*/
+		int m_distToTarget;//"H"
+
+		/** This is a sum of "G" and "H" */
+		int m_f; // "G" + "H"
+
+		/** The list with neighbors */
+		std::vector<int> m_neighbors;
+	};
+
+
+	/** Is a pointer to the used's nav mesh. */
 	NavMeshBase* m_navMesh;
 
 	
@@ -122,5 +178,6 @@ private:
 	* @return true if the job is finished. Return false if the job need to be processed also at the next step.*/
 	bool ProcessTicket(Ticket* ticket);
 
+	/** Is a list with tickets that must be processed. */
 	std::vector<Ticket*> m_tickets;
 };

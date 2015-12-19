@@ -6,8 +6,6 @@
 
 
 
-class Tile;
-
 class NavMesh : public NavMeshBase
 {
 public:
@@ -21,9 +19,9 @@ public:
 
 	static int GetIndex(int x, int y){ return y * k_w + x; }
 
-	int ComputeGoalDistanceEstimate(NavMeshBase* navMesh, int goalNode, int node) override;
-	int ComputeCost(NavMeshBase* navMesh, int node, int neighbor) override;
-	std::vector<int> GetNeighbors(NavMeshBase* navMesh, int node) override;
+	int ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex) override;
+	int ComputeCost(int nodeIndex, int neighborIndex) override;
+	std::vector<int> GetNeighbors(int nodeIndex) override;
 };
 
 
@@ -45,24 +43,24 @@ NavMesh::NavMesh()
 	
 }
 
-int NavMesh::ComputeGoalDistanceEstimate(NavMeshBase* navMesh, int goalNode, int node)
+int NavMesh::ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex)
 {
-	int goalNodeX = goalNode % NavMesh::k_w;
-	int goalNodeY = goalNode / NavMesh::k_w;
+	int goalX = goalIndex % NavMesh::k_w;
+	int goalY = goalIndex / NavMesh::k_w;
 
-	int nodeX = node % NavMesh::k_w;
-	int nodeY = node / NavMesh::k_w;
+	int nodeX = nodeIndex % NavMesh::k_w;
+	int nodeY = nodeIndex / NavMesh::k_w;
 
-	return std::abs(nodeX - goalNodeX) + std::abs(nodeY - goalNodeY);
+	return std::abs(nodeX - goalX) + std::abs(nodeY - goalY);
 }
 
-int NavMesh::ComputeCost(NavMeshBase* navMesh, int node, int neighbor)
+int NavMesh::ComputeCost(int nodeIndex, int neighborIndex)
 {
-	int neighborX = neighbor % NavMesh::k_w;
-	int neighborY = neighbor / NavMesh::k_w;
+	int neighborX = neighborIndex % NavMesh::k_w;
+	int neighborY = neighborIndex / NavMesh::k_w;
 
-	int nodeX = node % NavMesh::k_w;
-	int nodeY = node / NavMesh::k_w;
+	int nodeX = nodeIndex % NavMesh::k_w;
+	int nodeY = nodeIndex / NavMesh::k_w;
 
 	int x = std::abs(neighborX - nodeX);
 	int y = std::abs(neighborY - nodeY);
@@ -78,12 +76,12 @@ int NavMesh::ComputeCost(NavMeshBase* navMesh, int node, int neighbor)
 	return 0;
 };
 
-std::vector<int> NavMesh::GetNeighbors(NavMeshBase* navMesh, int node)
+std::vector<int> NavMesh::GetNeighbors(int nodeIndex)
 {
 	std::vector<int> neighbors;
 
-	int nodeX = node % NavMesh::k_w;
-	int nodeY = node / NavMesh::k_w;
+	int nodeX = nodeIndex % NavMesh::k_w;
+	int nodeY = nodeIndex / NavMesh::k_w;
 
 	for (int y = nodeY - 1; y <= nodeY + 1; y++)
 	{
