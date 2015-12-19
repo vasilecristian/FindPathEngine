@@ -1,20 +1,10 @@
-// ConsoleApplication1.cpp : Defines the entry point for the console application.
-//
-
-
 
 #include "FindPathEngine/FindPathEngine.h"
-#include <vector>
-#include <memory>
-#include <array>
-#include <map>
-
 
 
 FindPathEngine::FindPathEngine(std::shared_ptr<NavMeshBase> navMesh)
 	: m_navMesh(navMesh)
 {
-
 }
 
 FindPathEngine::Ticket::Ticket(int startIndex, int goalIndex)
@@ -166,7 +156,7 @@ bool FindPathEngine::ProcessTicket(std::shared_ptr<Ticket> ticket)
 	/// Chekc if there are some nodes in Open list
 	if (ticket->m_openList.size() == 0)
 	{
-		ticket->m_pathFound.push_back(ticket->m_goalIndex);
+		//ticket->m_pathFound.push_back(ticket->m_goalIndex);
 		std::shared_ptr<Node> node = ticket->m_current;
 		do
 		{

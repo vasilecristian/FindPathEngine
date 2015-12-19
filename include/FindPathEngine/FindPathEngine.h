@@ -65,8 +65,10 @@ public:
 	FindPathEngine(std::shared_ptr<NavMeshBase> navMesh);
 
 	/** This is a ticket used to describe a find path request.*/
-	struct Ticket
+	class Ticket
 	{
+		friend class FindPathEngine;
+	public:
 		/** The constructor.
 		* @param startIndex is the start node.
 		* @param goalIndex is the target node */
@@ -88,6 +90,17 @@ public:
 			STOPPED,
 		};
 
+		/** Getter for the state of Ticket .*/
+		State GetState(){ return m_state; }
+
+		/** Getter for the steps required to determine the path .*/
+		int GetSteps(){ return m_steps; }
+
+		/** Getter for the detected path. */
+		std::vector<int>& GetFoundPath(){ return m_pathFound; }
+		 
+	private:
+
 		/** This is the target */
 		int m_goalIndex;
 
@@ -107,11 +120,10 @@ public:
 		std::vector<int> m_pathFound;
 
 		/** Is the list with possible/available nodes to check.*/
-		std::map<int, std::shared_ptr<Node>> m_openList;
+		std::map<int, std::shared_ptr<Node> > m_openList;
 
 		/** Is the list with nodes already checked. */
-		std::map<int, std::shared_ptr<Node>> m_closedList;
-
+		std::map<int, std::shared_ptr<Node> > m_closedList;
 	};
 
 	/** Add a new request to determine a path */

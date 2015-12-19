@@ -29,7 +29,7 @@ public:
 const int NavMesh::k_collisions[NavMesh::k_meshSize] = {
 /*    0  1  2  3  4  5  6  7  */
 /*0*/ 1, 1, 1, 1, 1, 1, 1, 1,
-/*1*/ 1, 0, 1, 0, 0, 0, 0, 1,
+/*1*/ 1, 0, 1, 0, 0, 1, 0, 1,
 /*2*/ 1, 0, 1, 0, 1, 1, 0, 1,
 /*3*/ 1, 0, 1, 0, 1, 0, 1, 1,
 /*4*/ 1, 0, 1, 0, 1, 0, 0, 1,
@@ -131,7 +131,7 @@ int main(int argc, char* argv[])
 
 	}
 
-	for (auto& nodeIndex : ticket->m_pathFound)
+	for (auto& nodeIndex : ticket->GetFoundPath())
 	{
 		std::cout << "result " << nodeIndex << " " << (nodeIndex % NavMesh::k_w) << "x" << (nodeIndex / NavMesh::k_w) << std::endl;
 	}
