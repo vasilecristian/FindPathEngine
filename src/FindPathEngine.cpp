@@ -191,20 +191,20 @@ namespace fpe
 			}
 		}
 
-		//std::cout << ticket->m_current->m_f << std::endl;
+		//int i = 0;
+		//for (auto& on : ticket->m_openList)
+		//{
+		//	std::cout << i << " I" << on.first << " " << on.first % 8 << "x" << on.first / 8 << " F" << on.second->m_f << " G" << on.second->m_cost << " H" << on.second->m_distToTarget << std::endl;
+		//	i++;
+		//}
+		//std::cout << "Current I" << ticket->m_current->m_index << " " << ticket->m_current->m_index % 8 << "x" << ticket->m_current->m_index / 8 << " F" << ticket->m_current->m_f << " G" << ticket->m_current->m_cost << " H" << ticket->m_current->m_distToTarget << std::endl;
+
 
 		ticket->m_openList.erase(ticket->m_current->m_index);
 
 		ticket->m_closedList[ticket->m_current->m_index] = ticket->m_current;
 
-		/*int i = 0;
-		for (auto& on : ticket->m_openList)
-		{
-			std::cout << i << " " << on.second << " " << on.first << " " << on.first % 8 << "x" << on.first / 8 << " " << on.second->m_f << std::endl;
-			i++;
-		}
-		std::cout << "Current " << ticket->m_current << " " << ticket->m_current->m_index << " " << ticket->m_current->m_index % 8 << "x" << ticket->m_current->m_index / 8 << " " << ticket->m_current->m_f << std::endl;
-*/
+		
 
 		return false;
 	}

@@ -19,7 +19,7 @@ public:
 
 	static int GetIndex(int x, int y){ return y * k_w + x; }
 
-	int ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex) override;
+	float ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex) override;
 	int ComputeCost(int nodeIndex, int neighborIndex) override;
 	std::vector<int> GetNeighbors(int nodeIndex) override;
 };
@@ -43,7 +43,7 @@ NavMesh::NavMesh()
 	
 }
 
-int NavMesh::ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex)
+float NavMesh::ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex)
 {
 	int goalX = goalIndex % NavMesh::k_w;
 	int goalY = goalIndex / NavMesh::k_w;
@@ -51,10 +51,10 @@ int NavMesh::ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex)
 	int nodeX = nodeIndex % NavMesh::k_w;
 	int nodeY = nodeIndex / NavMesh::k_w;
 
-	//int dx = std::abs(nodeX - goalX);
-	//int dy = std::abs(nodeY - goalY);
-	//float dist = std::sqrtf(float(dx*dx + dy*dy)) *1000;
-	int dist = std::abs(nodeX - goalX) + std::abs(nodeY - goalY);
+	int dx = std::abs(nodeX - goalX);
+	int dy = std::abs(nodeY - goalY);
+	float dist = std::sqrtf(float(dx*dx + dy*dy)) *1000;
+	//int dist = std::abs(nodeX - goalX) + std::abs(nodeY - goalY);
 
 	return dist;
 }
@@ -127,7 +127,7 @@ int main(int argc, char* argv[])
 
 	fpe::FindPathEngine engine(navmesh);
 
-	std::shared_ptr<fpe::Ticket> ticket = std::make_shared<fpe::Ticket>(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 1));
+	std::shared_ptr<fpe::Ticket> ticket = std::make_shared<fpe::Ticket>(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 6));
 
 	engine.AddTicket(ticket);
 

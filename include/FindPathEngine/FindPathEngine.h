@@ -20,7 +20,7 @@ namespace fpe
 		* @param goalIndex is the index of the node that represent the target.
 		* @param nodeIndex is the index of the node that you want to calculate the distance.
 		* @return the estimated distance from nodeIndex to goalIndex.*/
-		virtual int ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex) = 0;
+		virtual float ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex) = 0;
 
 		/**  Must be implemented in derived class!
 		* This function will calculate the movement cost from a node to a neighbor node.
@@ -114,7 +114,6 @@ namespace fpe
 
 		~Node()
 		{
-
 		}
 
 	private:
@@ -126,16 +125,15 @@ namespace fpe
 
 		/** This is the cost to move to this tile. Is called also "G" value. This
 		* must be a sum of parent cost and the cost to move to this node starting from parent.
-		* By default this is -1 which means that this was not calculated yet => the GetCost function
-		* will calculate it.*/
+		* By default this is -1 which means that this was not calculated yet.*/
 		int m_cost;//"G"
 
 
 		/** This the distance to target. It is calculated using a heuristic. It is called also the "H" value.
 		* The function ComputeGoalDistanceEstimate will compute it.*/
-		int m_distToTarget;//"H"
+		float m_distToTarget;//"H"
 
-		/** This is a sum of "G" and "H" */
+		/** This is "F" a sum of "G" and "H" */
 		int m_f; // "G" + "H"
 
 		/** The list with neighbors */
