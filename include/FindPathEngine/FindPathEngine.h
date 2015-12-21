@@ -7,6 +7,9 @@
 #include <map>
 #include <iostream>
 #include <functional>
+#include <atomic>
+#include <mutex>
+#include <thread>
 
 namespace fpe
 {
@@ -60,13 +63,15 @@ namespace fpe
 	*   /// or when the path cannot be determined.
 	* }
 	* // ------------------*/
-	class FindPathEngine
+	class FindPathEngine : public std::enable_shared_from_this<FindPathEngine>
 	{
 	public:
 
 		/** The constructor.
 		* @param navMesh is a pointer to the user's navmesh class.*/
 		FindPathEngine(std::shared_ptr<NavMeshBase> navMesh);
+
+		~FindPathEngine();
 
 		/** Add a new request to determine a path */
 		void AddTicket(std::shared_ptr<Ticket> ticket);
@@ -89,8 +94,12 @@ namespace fpe
 		* @return true if the job is finished. Return false if the job need to be processed also at the next step.*/
 		bool ProcessTicket(std::shared_ptr<Ticket> ticket);
 
+		void ProcessTicketAsync(std::shared_ptr<Ticket> ticket);
+
 		/** Is a list with tickets that must be processed. */
 		std::vector<std::shared_ptr<Ticket> > m_tickets;
+
+		std::vector<std::thread*> m_threads;
 	};
 
 
@@ -148,8 +157,9 @@ namespace fpe
 	public:
 		/** The constructor.
 		* @param startIndex is the start node.
-		* @param goalIndex is the target node */
-		Ticket(int startIndex, int goalIndex);
+		* @param goalIndex is the target node 
+		* @param runAsync if is true the path process will run on a separate thread.*/
+		Ticket(int startIndex, int goalIndex, bool runAsync);
 
 		/** Used to describe the possible states of the Ticket.*/
 		enum class State : int
@@ -183,36 +193,52 @@ namespace fpe
 		int GetStartIndex(){ return m_startIndex; }
 
 		/** Getter for the open list */
-		std::map<int, std::shared_ptr<Node> >& GetOpenList(){ return m_openList; }
+		std::map<int, std::shared_ptr<Node> >& GetOpenList();
 
 		/** Getter for the closed list */
-		std::map<int, std::shared_ptr<Node> >& GetClosedList(){ return m_closedList; }
+		std::map<int, std::shared_ptr<Node> >& GetClosedList();
+
+		/** Use this function to stop the process of path finding.*/
+		void Stop();
 
 	private:
 
 		/** This is the target */
-		int m_goalIndex;
+		std::atomic<int> m_goalIndex;
 
 		/** This is the start location */
-		int m_startIndex;
+		std::atomic<int> m_startIndex;
 
 		/** Cuttent node processed */
 		std::shared_ptr<Node> m_current;
 
 		/** The status of the ticket */
-		State m_state;
+		std::atomic<State> m_state;
 
 		/** How many steps this path required to be detected */
-		int m_steps;
+		std::atomic<int> m_steps;
 
 		/** The list with nodes that represent the detected path */
 		std::vector<int> m_pathFound;
 
+		/** Protect the m_pathFound for multithread access */
+		std::mutex m_pathFoundMutex;
+
 		/** Is the list with possible/available nodes to check.*/
 		std::map<int, std::shared_ptr<Node> > m_openList;
 
+		std::mutex m_openListMutex;
+
 		/** Is the list with nodes already checked. */
 		std::map<int, std::shared_ptr<Node> > m_closedList;
+
+		std::mutex m_closedListMutex;
+
+		/** This will be checked in the ProcessTicket function. If is true, the 
+		* path finding process will be stopped.*/
+		std::atomic<bool> m_mustStop;
+
+		std::atomic<bool> m_runAsync;
 	};
 
 } // namespace fpe

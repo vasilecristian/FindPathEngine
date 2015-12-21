@@ -10,19 +10,66 @@ namespace fpe
 	{
 	}
 
-	Ticket::Ticket(int startIndex, int goalIndex)
+	FindPathEngine::~FindPathEngine()
+	{
+		for (auto& ticket : m_tickets)
+		{
+			ticket->Stop();
+		}
+
+		for (auto tr : m_threads)
+		{
+			if (tr->joinable())
+				tr->join();
+
+			delete tr;
+		}
+
+		m_threads.clear();
+	}
+
+
+	Ticket::Ticket(int startIndex, int goalIndex, bool runAsync)
 		: m_startIndex(startIndex)
 		, m_goalIndex(goalIndex)
 		, m_current(nullptr)
 		, m_state(State::WAITING)
 		, m_steps(0)
+		, m_mustStop(false)
+		, m_runAsync(runAsync)
 	{
 	}
 
 	std::vector<int>& Ticket::GetFoundPath()
 	{ 
+		/// protect the m_pathFound for multithread access
+		std::lock_guard<std::mutex> lock(m_pathFoundMutex);
 		return m_pathFound;
 	}
+
+	std::map<int, std::shared_ptr<Node> >& Ticket::GetOpenList()
+	{ 
+		/// protect the m_openList for multithread access
+		std::lock_guard<std::mutex> lock(m_openListMutex);
+
+		return m_openList; 
+	}
+
+	std::map<int, std::shared_ptr<Node> >& Ticket::GetClosedList()
+	{ 
+		/// protect the m_closedList for multithread access
+		std::lock_guard<std::mutex> lock(m_closedListMutex);
+
+		return m_closedList; 
+	}
+
+
+	void Ticket::Stop()
+	{
+		m_mustStop = true;
+	}
+
+
 
 
 	/** Add a new request to determine a path */
@@ -39,13 +86,31 @@ namespace fpe
 	{
 		for (auto it = m_tickets.begin(); it != m_tickets.end();)
 		{
-			if (ProcessTicket((*it)))
+			if ((*it)->m_runAsync)
+			{
+				if ((*it)->m_state == Ticket::State::WAITING)
+				{
+					m_threads.push_back(new std::thread(std::bind(&FindPathEngine::ProcessTicketAsync, this->shared_from_this(), (*it))));
+				}
+			}
+			else if (ProcessTicket((*it)))
+			{
 				it = m_tickets.erase(it);
-			else
-				++it;
+				continue;
+			}
+			
+			++it;
 		}
 
 		return (m_tickets.size() == 0);
+	}
+
+	void FindPathEngine::ProcessTicketAsync(std::shared_ptr<Ticket> ticket)
+	{
+		while (!ProcessTicket(ticket))
+		{
+			/// Execute the ProcessTicket until true is returned.
+		}
 	}
 
 	bool FindPathEngine::ProcessTicket(std::shared_ptr<Ticket> ticket)
@@ -54,9 +119,20 @@ namespace fpe
 
 		ticket->m_steps++;
 
+		/// Check if the process must be stopped due to external reasons...
+		if (ticket->m_mustStop)
+		{
+			/// Search is stopped because the Ticket::Stop() was called.
+			ticket->m_state = Ticket::State::STOPPED;
+			return true;
+		}
+
 		/// Chekc if the m_start is the same with m_goalIndex
 		if (ticket->m_startIndex == ticket->m_goalIndex)
 		{
+			/// protect the m_pathFound for multithread access
+			std::lock_guard<std::mutex> lock(ticket->m_pathFoundMutex);
+
 			ticket->m_pathFound.push_back(ticket->m_startIndex);
 
 			/// Search is stopped because the goal si the same with start node
@@ -64,29 +140,34 @@ namespace fpe
 			return true;
 		}
 
-		/// This is the first step -> closed list is empty.
-		/// Add the start node to the closed list.
-		if (ticket->m_closedList.size() == 0)
+		/// protect the m_closedList for multithread access
 		{
-			std::shared_ptr<Node> start = std::make_shared<Node>(ticket->m_startIndex);
+			std::lock_guard<std::mutex> lock(ticket->m_closedListMutex);
 
-			/// In this case, we will add the start node.
-			start->m_parent = nullptr;
+			/// This is the first step -> closed list is empty.
+			/// Add the start node to the closed list.
+			if (ticket->m_closedList.size() == 0)
+			{
+				std::shared_ptr<Node> start = std::make_shared<Node>(ticket->m_startIndex);
 
-			/// calculate the distance to target
-			start->m_distToTarget = m_navMesh->ComputeGoalDistanceEstimate(ticket->m_goalIndex, ticket->m_startIndex);
+				/// In this case, we will add the start node.
+				start->m_parent = nullptr;
 
-			/// calculate the cost to travel from m_startIndex node to the neighbor note
-			start->m_cost = 0;
+				/// calculate the distance to target
+				start->m_distToTarget = m_navMesh->ComputeGoalDistanceEstimate(ticket->m_goalIndex, ticket->m_startIndex);
 
-			/// Calculate the "F" value
-			start->m_f = start->m_distToTarget;
+				/// calculate the cost to travel from m_startIndex node to the neighbor note
+				start->m_cost = 0;
 
-			/// Add the neighbor node to the open list
-			ticket->m_closedList[ticket->m_startIndex] = start;
+				/// Calculate the "F" value
+				start->m_f = start->m_distToTarget;
 
-			/// Set the current node to be the start node
-			ticket->m_current = start;
+				/// Add the neighbor node to the open list
+				ticket->m_closedList[ticket->m_startIndex] = start;
+
+				/// Set the current node to be the start node
+				ticket->m_current = start;
+			}
 		}
 
 
@@ -101,6 +182,9 @@ namespace fpe
 			/// Check if the goal is one of the neighbors
 			if (ticket->m_goalIndex == neighbor)
 			{
+				/// protect the m_pathFound for multithread access
+				std::lock_guard<std::mutex> lock(ticket->m_pathFoundMutex);
+
 				ticket->m_pathFound.push_back(ticket->m_goalIndex);
 
 				std::shared_ptr<Node> node = ticket->m_current;
@@ -117,6 +201,12 @@ namespace fpe
 
 			bool addedAlready = false;
 			std::shared_ptr<Node> neigh = nullptr;
+
+			/// protect the m_openList for multithread access
+			std::lock_guard<std::mutex> lockOpenList(ticket->m_openListMutex);
+
+			/// protect the m_closedList for multithread access
+			std::lock_guard<std::mutex> lockClosedList(ticket->m_closedListMutex);
 
 			/// check if is in open list
 			if (ticket->m_openList.find(neighbor) != ticket->m_openList.end())
@@ -162,47 +252,69 @@ namespace fpe
 			}
 		}
 
-
-		/// Chekc if there are some nodes in Open list
-		if (ticket->m_openList.size() == 0)
+		/// protect the m_openList for multithread access
 		{
-			//ticket->m_pathFound.push_back(ticket->m_goalIndex);
-			std::shared_ptr<Node> node = ticket->m_current;
-			do
-			{
-				ticket->m_pathFound.push_back(node->m_index);
-				//std::cout << "result " << node << " " << node->m_index << " " << node->m_f << std::endl;
-				node = node->m_parent;
-			} while (node != nullptr);
+			std::lock_guard<std::mutex> lock(ticket->m_openListMutex);
 
-			/// If no nodes -> search is stopped due to no path to goal.
-			ticket->m_state = Ticket::State::STOPPED;
-			return true;
-		}
-
-		/// Get the object with the 
-		int f = INT_MAX;
-		for (auto& on : ticket->m_openList)
-		{
-			if (on.second->m_f < f)
+			/// Chekc if there are some nodes in Open list
+			if (ticket->m_openList.size() == 0)
 			{
-				f = on.second->m_f;
-				ticket->m_current = on.second;
+				/// protect the m_pathFound for multithread access
+				std::lock_guard<std::mutex> lock(ticket->m_pathFoundMutex);
+
+				std::shared_ptr<Node> node = ticket->m_current;
+				do
+				{
+					ticket->m_pathFound.push_back(node->m_index);
+					//std::cout << "result " << node << " " << node->m_index << " " << node->m_f << std::endl;
+					node = node->m_parent;
+				} while (node != nullptr);
+
+				/// If no nodes -> search is stopped due to no path to goal.
+				ticket->m_state = Ticket::State::STOPPED;
+				return true;
 			}
 		}
 
-		//int i = 0;
-		//for (auto& on : ticket->m_openList)
-		//{
-		//	std::cout << i << " I" << on.first << " " << on.first % 8 << "x" << on.first / 8 << " F" << on.second->m_f << " G" << on.second->m_cost << " H" << on.second->m_distToTarget << std::endl;
-		//	i++;
-		//}
-		//std::cout << "Current I" << ticket->m_current->m_index << " " << ticket->m_current->m_index % 8 << "x" << ticket->m_current->m_index / 8 << " F" << ticket->m_current->m_f << " G" << ticket->m_current->m_cost << " H" << ticket->m_current->m_distToTarget << std::endl;
+
+		/// protect the m_openList for multithread access
+		{
+			std::lock_guard<std::mutex> lock(ticket->m_openListMutex);
+
+			/// Get the object with the 
+			float f = INT_MAX;
+			for (auto& on : ticket->m_openList)
+			{
+				if (on.second->m_f < f)
+				{
+					f = on.second->m_f;
+					ticket->m_current = on.second;
+				}
+			}
+
+		}
+
+		
+		/// protect the m_openList for multithread access
+		{
+			//int i = 0;
+			//for (auto& on : ticket->m_openList)
+			//{
+			//	std::cout << i << " I" << on.first << " " << on.first % 8 << "x" << on.first / 8 << " F" << on.second->m_f << " G" << on.second->m_cost << " H" << on.second->m_distToTarget << std::endl;
+			//	i++;
+			//}
+			//std::cout << "Current I" << ticket->m_current->m_index << " " << ticket->m_current->m_index % 8 << "x" << ticket->m_current->m_index / 8 << " F" << ticket->m_current->m_f << " G" << ticket->m_current->m_cost << " H" << ticket->m_current->m_distToTarget << std::endl;
+
+			std::lock_guard<std::mutex> lock(ticket->m_openListMutex);
+			ticket->m_openList.erase(ticket->m_current->m_index);
+		}
 
 
-		ticket->m_openList.erase(ticket->m_current->m_index);
-
-		ticket->m_closedList[ticket->m_current->m_index] = ticket->m_current;
+		/// protect the m_closedList for multithread access
+		{
+			std::lock_guard<std::mutex> lock(ticket->m_closedListMutex);
+			ticket->m_closedList[ticket->m_current->m_index] = ticket->m_current;
+		}
 
 		
 
