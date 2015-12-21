@@ -134,7 +134,7 @@ namespace fpe
 		float m_distToTarget;//"H"
 
 		/** This is "F" a sum of "G" and "H" */
-		int m_f; // "G" + "H"
+		float m_f; // "G" + "H"
 
 		/** The list with neighbors */
 		std::vector<int> m_neighbors;
@@ -176,8 +176,19 @@ namespace fpe
 		/** Getter for the detected path. */
 		std::vector<int>& GetFoundPath();
 
-	//private:
-	public:
+		/** Getter for the goal node */
+		int GetGoalIndex(){ return m_goalIndex; }
+
+		/** Getter for the start node */
+		int GetStartIndex(){ return m_startIndex; }
+
+		/** Getter for the open list */
+		std::map<int, std::shared_ptr<Node> >& GetOpenList(){ return m_openList; }
+
+		/** Getter for the closed list */
+		std::map<int, std::shared_ptr<Node> >& GetClosedList(){ return m_closedList; }
+
+	private:
 
 		/** This is the target */
 		int m_goalIndex;

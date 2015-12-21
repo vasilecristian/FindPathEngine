@@ -145,7 +145,7 @@ namespace fpe
 			neigh->m_cost = m_navMesh->ComputeCost(ticket->m_current->m_index, neighbor);
 
 			/// Calculate the "F" value
-			int f = neigh->m_distToTarget + neigh->m_cost;
+			float f = neigh->m_distToTarget + neigh->m_cost;
 
 			/// If the "F" have the default value it means that this node does not have added 
 			/// to the open list before.
