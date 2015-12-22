@@ -19,8 +19,6 @@ namespace fpe
 			ticket->Stop();
 		}
 
-		m_threadsPool->JoinAll();
-
 		delete m_threadsPool;
 	}
 
