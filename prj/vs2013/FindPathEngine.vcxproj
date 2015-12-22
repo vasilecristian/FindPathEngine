@@ -123,7 +123,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\include\FindPathEngine\FindPathEngine.h" />
-    <ClInclude Include="..\..\include\FindPathEngine\ThreadPool.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\FindPathEngine.cpp" />

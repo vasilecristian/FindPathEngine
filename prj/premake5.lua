@@ -19,6 +19,7 @@ project "FindPathEngine"
     {
         "../include/",
 		"../src/",
+		"../../ThreadPool/include/"
     }
     kind "StaticLib"
     targetdir("../lib/" .. GetPathFromPlatform())

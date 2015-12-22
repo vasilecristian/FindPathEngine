@@ -10,8 +10,12 @@
 #include <atomic>
 #include <mutex>
 
-#include "FindPathEngine/ThreadPool.h"
 
+
+namespace tp
+{
+	class ThreadPool;
+}
 
 namespace fpe
 {
@@ -70,8 +74,9 @@ namespace fpe
 	public:
 
 		/** The constructor.
-		* @param navMesh is a pointer to the user's navmesh class.*/
-		FindPathEngine(std::shared_ptr<NavMeshBase> navMesh);
+		* @param navMesh is a pointer to the user's navmesh class.
+		* @param is the number of threads used to calculate the paths*/
+		FindPathEngine(std::shared_ptr<NavMeshBase> navMesh, unsigned int threadsCount);
 
 		~FindPathEngine();
 
@@ -102,7 +107,7 @@ namespace fpe
 		std::vector<std::shared_ptr<Ticket> > m_tickets;
 
 
-		ThreadPool<6> m_threadsPool;
+		tp::ThreadPool* m_threadsPool;
 	};
 
 

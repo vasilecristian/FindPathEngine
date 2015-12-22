@@ -1,13 +1,15 @@
 
 #include "FindPathEngine/FindPathEngine.h"
 
+#include "ThreadPool/ThreadPool.h"
 
 
 namespace fpe
 {
-	FindPathEngine::FindPathEngine(std::shared_ptr<NavMeshBase> navMesh)
+	FindPathEngine::FindPathEngine(std::shared_ptr<NavMeshBase> navMesh, unsigned int threadsCount)
 		: m_navMesh(navMesh)
 	{
+		m_threadsPool = new tp::ThreadPool(threadsCount);
 	}
 
 	FindPathEngine::~FindPathEngine()
@@ -17,7 +19,9 @@ namespace fpe
 			ticket->Stop();
 		}
 
-		m_threadsPool.JoinAll();
+		m_threadsPool->JoinAll();
+
+		delete m_threadsPool;
 	}
 
 
@@ -84,7 +88,7 @@ namespace fpe
 				if (!(*it)->m_runAsyncQueued)
 				{
 					(*it)->m_runAsyncQueued = true;
-					m_threadsPool.AddJob(std::bind(&FindPathEngine::ProcessTicketAsync, this->shared_from_this(), (*it)));
+					m_threadsPool->AddJob(std::bind(&FindPathEngine::ProcessTicketAsync, this->shared_from_this(), (*it)));
 				}
 				else
 				{

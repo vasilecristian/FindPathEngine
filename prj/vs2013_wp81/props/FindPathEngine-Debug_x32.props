@@ -8,7 +8,7 @@
     <PrecompiledHeader>NotUsing</PrecompiledHeader>
     <WarningLevel>Level3</WarningLevel>
     <PreprocessorDefinitions>_DEBUG;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;OS_WP8;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    <AdditionalIncludeDirectories>..\..\include;..\..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    <AdditionalIncludeDirectories>..\..\include;..\..\src;..\..\..\ThreadPool\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <ProgramDataBaseFileName>$(OutDir)FindPathEngine_x86_d.pdb</ProgramDataBaseFileName>
       <Optimization>Disabled</Optimization>
