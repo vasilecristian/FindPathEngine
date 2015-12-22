@@ -17,15 +17,7 @@ namespace fpe
 			ticket->Stop();
 		}
 
-		for (auto tr : m_threads)
-		{
-			if (tr->joinable())
-				tr->join();
-
-			delete tr;
-		}
-
-		m_threads.clear();
+		m_threadsPool.JoinAll();
 	}
 
 
@@ -37,6 +29,7 @@ namespace fpe
 		, m_steps(0)
 		, m_mustStop(false)
 		, m_runAsync(runAsync)
+		, m_runAsyncQueued(false)
 	{
 	}
 
@@ -47,7 +40,7 @@ namespace fpe
 		return m_pathFound;
 	}
 
-	std::map<int, std::shared_ptr<Node> >& Ticket::GetOpenList()
+	std::map<int, std::shared_ptr<Node> > Ticket::GetOpenList()
 	{ 
 		/// protect the m_openList for multithread access
 		std::lock_guard<std::mutex> lock(m_openListMutex);
@@ -55,7 +48,7 @@ namespace fpe
 		return m_openList; 
 	}
 
-	std::map<int, std::shared_ptr<Node> >& Ticket::GetClosedList()
+	std::map<int, std::shared_ptr<Node> > Ticket::GetClosedList()
 	{ 
 		/// protect the m_closedList for multithread access
 		std::lock_guard<std::mutex> lock(m_closedListMutex);
@@ -88,9 +81,20 @@ namespace fpe
 		{
 			if ((*it)->m_runAsync)
 			{
-				if ((*it)->m_state == Ticket::State::WAITING)
+				if (!(*it)->m_runAsyncQueued)
 				{
-					m_threads.push_back(new std::thread(std::bind(&FindPathEngine::ProcessTicketAsync, this->shared_from_this(), (*it))));
+					(*it)->m_runAsyncQueued = true;
+					m_threadsPool.AddJob(std::bind(&FindPathEngine::ProcessTicketAsync, this->shared_from_this(), (*it)));
+				}
+				else
+				{
+					if (((*it)->m_state == Ticket::State::COMPLETED)
+						|| ((*it)->m_state == Ticket::State::STOPPED))
+					{
+						it = m_tickets.erase(it);
+						continue;
+					}
+
 				}
 			}
 			else if (ProcessTicket((*it)))

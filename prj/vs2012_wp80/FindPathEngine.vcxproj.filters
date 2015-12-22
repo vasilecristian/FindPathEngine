@@ -15,6 +15,9 @@
     <ClInclude Include="..\..\include\FindPathEngine\FindPathEngine.h">
       <Filter>include\FindPathEngine</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\include\FindPathEngine\ThreadPool.h">
+      <Filter>include\FindPathEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\FindPathEngine.cpp">

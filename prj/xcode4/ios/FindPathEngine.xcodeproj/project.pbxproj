@@ -13,6 +13,7 @@
 /* Begin PBXFileReference section */
 		83EDC79C207F7946D38F7DDC /* FindPathEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FindPathEngine.h; path = ../../../include/FindPathEngine/FindPathEngine.h; sourceTree = "<group>"; };
 		906C880799A4FC31A042CE47 /* FindPathEngine */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = FindPathEngine; path = libFindPathEngine_d.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCED1FF88A24C7A2925C9638 /* ThreadPool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ThreadPool.h; path = ../../../include/FindPathEngine/ThreadPool.h; sourceTree = "<group>"; };
 		FDA7DCC310E32FAD76CBDB03 /* FindPathEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = FindPathEngine.cpp; path = ../../../src/FindPathEngine.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -57,6 +58,7 @@
 			isa = PBXGroup;
 			children = (
 				83EDC79C207F7946D38F7DDC /* FindPathEngine.h */,
+				BCED1FF88A24C7A2925C9638 /* ThreadPool.h */,
 			);
 			name = FindPathEngine;
 			sourceTree = "<group>";

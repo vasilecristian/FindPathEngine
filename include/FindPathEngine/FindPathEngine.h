@@ -9,7 +9,9 @@
 #include <functional>
 #include <atomic>
 #include <mutex>
-#include <thread>
+
+#include "FindPathEngine/ThreadPool.h"
+
 
 namespace fpe
 {
@@ -99,7 +101,8 @@ namespace fpe
 		/** Is a list with tickets that must be processed. */
 		std::vector<std::shared_ptr<Ticket> > m_tickets;
 
-		std::vector<std::thread*> m_threads;
+
+		ThreadPool<6> m_threadsPool;
 	};
 
 
@@ -193,10 +196,10 @@ namespace fpe
 		int GetStartIndex(){ return m_startIndex; }
 
 		/** Getter for the open list */
-		std::map<int, std::shared_ptr<Node> >& GetOpenList();
+		std::map<int, std::shared_ptr<Node> > GetOpenList();
 
 		/** Getter for the closed list */
-		std::map<int, std::shared_ptr<Node> >& GetClosedList();
+		std::map<int, std::shared_ptr<Node> > GetClosedList();
 
 		/** Use this function to stop the process of path finding.*/
 		void Stop();
@@ -239,6 +242,8 @@ namespace fpe
 		std::atomic<bool> m_mustStop;
 
 		std::atomic<bool> m_runAsync;
+
+		std::atomic<bool> m_runAsyncQueued;
 	};
 
 } // namespace fpe
