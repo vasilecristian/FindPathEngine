@@ -11,7 +11,7 @@
 #include <mutex>
 
 
-
+/// forward declaration for ThreadPool
 namespace tp
 {
 	class ThreadPool;
@@ -57,13 +57,16 @@ namespace fpe
 	* // ------------------
 	* std::shared_ptr<NavMesh> navmesh = std::make_shared<NavMesh>();
 	*
-	* FindPathEngine engine(navmesh);
+	* std::shared_ptr<fpe::FindPathEngine> engine = std::make_shared<fpe::FindPathEngine>(navmesh, // the navmesh pointer 
+	*																					  6);      // threads in thread pool
 	*
-	* std::shared_ptr<FindPathEngine::Ticket> ticket = std::make_shared<FindPathEngine::Ticket>(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 6));
+	* std::shared_ptr<fpe::Ticket> ticket = std::make_shared<fpe::Ticket>(NavMesh::GetIndex(1, 1), //start 
+	*																	  NavMesh::GetIndex(6, 6), //goal
+	*																	  true); //run async
 	*
 	* engine.AddTicket(ticket);
 	*
-	* while (!engine.Update())
+	* while (!engine.Update()) // Call Update each frame.
 	* {
 	*   /// this loop will stop when the path was found,
 	*   /// or when the path cannot be determined.
@@ -83,7 +86,12 @@ namespace fpe
 		/** Add a new request to determine a path */
 		void AddTicket(std::shared_ptr<Ticket> ticket);
 
-		/** This function will run and process every Ticket.
+		/** This function will run and process every Ticket. If a ticket is supposed to run async,
+		* a job will be posted and a thread from the threads pool will process the ticket. When the 
+		* ticket is solved, will be removed from the list.
+		* If a ticket is not async, will be processed on the same thread (with Update function), but
+		* the Update will not block the thread. Each time (aka each frame) the Update function will 
+		* process only one step from the search algorithm.
 		* If a ticket is solved (aka the path was found, or there is not solution) just remove the
 		* ticket from the pending list.
 		* @return true if pending list with tickets is empty.*/
@@ -101,12 +109,18 @@ namespace fpe
 		* @return true if the job is finished. Return false if the job need to be processed also at the next step.*/
 		bool ProcessTicket(std::shared_ptr<Ticket> ticket);
 
+		/** This function is used as a job for the threads pool.
+		* This function is blockant, so the thread that will process this,
+		* will end when the path is calculated.
+		* @param ticket is the request processed*/
 		void ProcessTicketAsync(std::shared_ptr<Ticket> ticket);
 
 		/** Is a list with tickets that must be processed. */
 		std::vector<std::shared_ptr<Ticket> > m_tickets;
 
+		unsigned int m_threadsCount;
 
+		/** This is the Thread Pool.*/
 		tp::ThreadPool* m_threadsPool;
 	};
 

@@ -206,6 +206,9 @@
     <ProjectReference Include="FindPathEngine.vcxproj">
       <Project>{E9A19F51-D56F-9357-BE03-047EAA706FBC}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\ThreadPool\prj\vs2013_wp81\ThreadPool.vcxproj">
+      <Project>{77E74159-639F-83A6-CCA6-5C02B87D1E97}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

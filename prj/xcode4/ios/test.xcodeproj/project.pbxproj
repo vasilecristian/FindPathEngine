@@ -7,12 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		009BB29BA7CF9285C6FDD0DB /* libThreadPool_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7994C632058CD0DE93E62A3 /* libThreadPool_d.a */; };
 		17F5CCBC79CEDBA67C374AFC /* libFindPathEngine_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B382F6446C9EC5EE873B6C84 /* libFindPathEngine_d.a */; };
 		1A4D60D6760424404136AF16 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6496DAD43919F1FEFACD0114 /* main.cpp */; };
 		E24F4881B6D25FAB78856EC1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C3DD49D46D6D333B53FB89 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		501C08CE6196E9B883DCC70E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54FE92494D8A6A732E2B5889 /* ThreadPool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A36ABF1514CBAE3F3097E555;
+			remoteInfo = ThreadPool;
+		};
+		67930307790DE3F19B53C147 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 54FE92494D8A6A732E2B5889 /* ThreadPool.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BC962B5B2CA0DD45A997899B;
+			remoteInfo = ThreadPool;
+		};
 		E17F168005F45C6A67F4F4C0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 1E0E2D1F74B594497256535F /* FindPathEngine.xcodeproj */;
@@ -33,6 +48,7 @@
 		06C3DD49D46D6D333B53FB89 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		12D3AC85765B866F8BBE0AC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Info.plist; sourceTree = "<group>"; };
 		1E0E2D1F74B594497256535F /* libFindPathEngine_d.a */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FindPathEngine.xcodeproj"; path = FindPathEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		54FE92494D8A6A732E2B5889 /* libThreadPool_d.a */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ThreadPool.xcodeproj"; path = ../../../../ThreadPool/prj/xcode4/ios/ThreadPool.xcodeproj; sourceTree = SOURCE_ROOT; };
 		6496DAD43919F1FEFACD0114 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../test/main.cpp; sourceTree = "<group>"; };
 		E942D732F469F3DCF0716D72 /* test */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = test; path = test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -44,6 +60,7 @@
 			files = (
 				E24F4881B6D25FAB78856EC1 /* Foundation.framework in Frameworks */,
 				17F5CCBC79CEDBA67C374AFC /* libFindPathEngine_d.a in Frameworks */,
+				009BB29BA7CF9285C6FDD0DB /* libThreadPool_d.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,8 +107,17 @@
 			isa = PBXGroup;
 			children = (
 				1E0E2D1F74B594497256535F /* FindPathEngine.xcodeproj */,
+				54FE92494D8A6A732E2B5889 /* ThreadPool.xcodeproj */,
 			);
 			name = Projects;
+			sourceTree = "<group>";
+		};
+		C8C9BF8EE0972B388C4BB5CE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B7994C632058CD0DE93E62A3 /* libThreadPool_d.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		EA8E290FE2272BF9B2E0274F /* Products */ = {
@@ -121,6 +147,7 @@
 			);
 			dependencies = (
 				CAADA9A99D3CDA53CEC0BFE9 /* PBXTargetDependency */,
+				692E8A3780FBF5E12CB08077 /* PBXTargetDependency */,
 			);
 			name = test;
 			productInstallPath = "$(HOME)/Applications";
@@ -150,6 +177,10 @@
 					ProductGroup = 2A48DF00FCD80FAA2E5BF540 /* Products */;
 					ProjectRef = 1E0E2D1F74B594497256535F /* FindPathEngine.xcodeproj */;
 				},
+				{
+					ProductGroup = C8C9BF8EE0972B388C4BB5CE /* Products */;
+					ProjectRef = 54FE92494D8A6A732E2B5889 /* ThreadPool.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -164,6 +195,13 @@
 			fileType = archive.ar;
 			path = libFindPathEngine_d.a;
 			remoteRef = E17F168005F45C6A67F4F4C0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B7994C632058CD0DE93E62A3 /* libThreadPool_d.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libThreadPool_d.a;
+			remoteRef = 501C08CE6196E9B883DCC70E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -190,6 +228,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		692E8A3780FBF5E12CB08077 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ThreadPool;
+			targetProxy = 67930307790DE3F19B53C147 /* PBXContainerItemProxy */;
+		};
 		CAADA9A99D3CDA53CEC0BFE9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FindPathEngine;
@@ -216,7 +259,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
-				COMMON_HEADER_SEARCH_PATHS = ../../../include;
+				COMMON_HEADER_SEARCH_PATHS = (
+					../../../include,
+					../../../../ThreadPool/include,
+				);
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
@@ -275,7 +321,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
-				COMMON_HEADER_SEARCH_PATHS = ../../../include;
+				COMMON_HEADER_SEARCH_PATHS = (
+					../../../include,
+					../../../../ThreadPool/include,
+				);
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
@@ -338,7 +387,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
-				COMMON_HEADER_SEARCH_PATHS = ../../../include;
+				COMMON_HEADER_SEARCH_PATHS = (
+					../../../include,
+					../../../../ThreadPool/include,
+				);
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
@@ -399,7 +451,10 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
-				COMMON_HEADER_SEARCH_PATHS = ../../../include;
+				COMMON_HEADER_SEARCH_PATHS = (
+					../../../include,
+					../../../../ThreadPool/include,
+				);
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;

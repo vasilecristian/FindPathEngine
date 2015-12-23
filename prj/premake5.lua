@@ -3,6 +3,11 @@ include "../../premake/common/"
 
 solution "FindPathEngine"
     addCommonConfig()
+	
+	
+external "ThreadPool"
+    location  ("../../ThreadPool/prj/"  .. GetPathFromPlatform() )
+    kind "StaticLib"	
     
     
 project "FindPathEngine"
@@ -88,6 +93,7 @@ project "test"
 	includedirs 
 	{ 
 		"../include",
+		"../../ThreadPool/include/"
 	}
 				
 	--removeflags "NoRTTI"
@@ -115,7 +121,10 @@ project "test"
 		links { "Foundation.framework" }
 	end 
 		
-	links {"FindPathEngine"}
+	links {
+		"FindPathEngine",
+		"ThreadPool",
+		}
 
 	targetname( "test" )
 

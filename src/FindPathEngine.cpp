@@ -8,8 +8,11 @@ namespace fpe
 {
 	FindPathEngine::FindPathEngine(std::shared_ptr<NavMeshBase> navMesh, unsigned int threadsCount)
 		: m_navMesh(navMesh)
+		, m_threadsCount(threadsCount)
+		, m_threadsPool(nullptr)
 	{
-		m_threadsPool = new tp::ThreadPool(threadsCount);
+		if (m_threadsCount > 0)
+			m_threadsPool = new tp::ThreadPool(m_threadsCount);
 	}
 
 	FindPathEngine::~FindPathEngine()
@@ -79,32 +82,52 @@ namespace fpe
 	* @return true if pending list with tickets is empty.*/
 	bool FindPathEngine::Update()
 	{
+		/// Check the state of all tickets. 
+		/// If the ticket was processed, just remove it from the list.
 		for (auto it = m_tickets.begin(); it != m_tickets.end();)
 		{
+			/// Check if the thread pool is ok. The thread pool can be null
+			/// because the threadsCount parameter in the constructor is 0!
+			if ((m_threadsPool == nullptr) && ((*it)->m_runAsync))
+			{
+				/// In this case if a job is supposed to run async, will be executed on 
+				/// the same thread (with Update function). So, change the runAsync flag to false.
+				(*it)->m_runAsync = false;
+			}
+
 			if ((*it)->m_runAsync)
 			{
+				/// If the Ticket must be processed async (aka on a separate thread)
+
 				if (!(*it)->m_runAsyncQueued)
 				{
+					/// If the ticket was not already started, Add a job to the thread pool.
 					(*it)->m_runAsyncQueued = true;
 					m_threadsPool->AddJob(std::bind(&FindPathEngine::ProcessTicketAsync, this->shared_from_this(), (*it)));
 				}
 				else
 				{
+					/// Check if the ticket was processed. 
 					if (((*it)->m_state == Ticket::State::COMPLETED)
-						|| ((*it)->m_state == Ticket::State::STOPPED))
+					 || ((*it)->m_state == Ticket::State::STOPPED))
 					{
+						/// Remove the ticket from the list.
 						it = m_tickets.erase(it);
 						continue;
 					}
-
 				}
 			}
+
+			/// If the ticket must be processed on the same thread with Update(),
+			/// Just check what ProcessTicket function returns. 
 			else if (ProcessTicket((*it)))
 			{
+				/// Remove the ticket from the list.
 				it = m_tickets.erase(it);
 				continue;
 			}
 			
+			/// Go to next ticket
 			++it;
 		}
 
@@ -287,8 +310,8 @@ namespace fpe
 		{
 			std::lock_guard<std::mutex> lock(ticket->m_openListMutex);
 
-			/// Get the object with the 
-			float f = INT_MAX;
+			/// Get the object with the minimal "F"
+			float f = (float)INT_MAX;
 			for (auto& on : ticket->m_openList)
 			{
 				if (on.second->m_f < f)

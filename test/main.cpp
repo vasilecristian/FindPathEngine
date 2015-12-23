@@ -125,13 +125,13 @@ int main(int argc, char* argv[])
 {
 	std::shared_ptr<NavMesh> navmesh = std::make_shared<NavMesh>();
 
-	fpe::FindPathEngine engine(navmesh);
+	std::shared_ptr<fpe::FindPathEngine> engine = std::make_shared<fpe::FindPathEngine>(navmesh, 0);
 
-	std::shared_ptr<fpe::Ticket> ticket = std::make_shared<fpe::Ticket>(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 6));
+	std::shared_ptr<fpe::Ticket> ticket = std::make_shared<fpe::Ticket>(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 6), true);
 
-	engine.AddTicket(ticket);
+	engine->AddTicket(ticket);
 
-	while (!engine.Update())
+	while (!engine->Update())
 	{
 
 	}
