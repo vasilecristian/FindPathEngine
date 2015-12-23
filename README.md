@@ -27,7 +27,7 @@ class NavMesh : public fpe::NavMeshBase
 public:
 	NavMesh();
 
-	static int GetIndex(int x, int y){ return y * k_w + x; }
+	static int GetIndex(int x, int y);
 
 	float ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex) override;
 	
