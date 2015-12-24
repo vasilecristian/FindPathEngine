@@ -10,18 +10,18 @@ class NavMesh : public fpe::NavMeshBase
 {
 public:
 	NavMesh();
-	static const int k_w = 8;
-	static const int k_h = 8;
-	static const int k_meshSize = k_w * k_h;
+	static const unsigned int k_w = 8;
+	static const unsigned int k_h = 8;
+	static const unsigned int k_meshSize = k_w * k_h;
 
 
 	static const int k_collisions[];
 
-	static int GetIndex(int x, int y){ return y * k_w + x; }
+	static unsigned int GetIndex(unsigned int x, unsigned int y){ return y * k_w + x; }
 
-	float ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex) override;
-	int ComputeCost(int nodeIndex, int neighborIndex) override;
-	std::vector<int> GetNeighbors(int nodeIndex) override;
+	int ComputeGoalDistanceEstimate(unsigned int goalIndex, unsigned int nodeIndex) override;
+	int ComputeCost(unsigned int nodeIndex, unsigned int neighborIndex) override;
+	std::vector<unsigned int> GetNeighbors(unsigned int nodeIndex) override;
 };
 
 
@@ -43,7 +43,7 @@ NavMesh::NavMesh()
 	
 }
 
-float NavMesh::ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex)
+int NavMesh::ComputeGoalDistanceEstimate(unsigned int goalIndex, unsigned int nodeIndex)
 {
 	int goalX = goalIndex % NavMesh::k_w;
 	int goalY = goalIndex / NavMesh::k_w;
@@ -53,13 +53,12 @@ float NavMesh::ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex)
 
 	int dx = std::abs(nodeX - goalX);
 	int dy = std::abs(nodeY - goalY);
-	float dist = std::sqrtf(float(dx*dx + dy*dy)) *1000;
-	//int dist = std::abs(nodeX - goalX) + std::abs(nodeY - goalY);
+	float dist = std::sqrtf(float(dx*dx + dy*dy)) * 1000;
 
-	return dist;
+	return (int)dist;
 }
 
-int NavMesh::ComputeCost(int nodeIndex, int neighborIndex)
+int NavMesh::ComputeCost(unsigned int nodeIndex, unsigned int neighborIndex)
 {
 	int neighborX = neighborIndex % NavMesh::k_w;
 	int neighborY = neighborIndex / NavMesh::k_w;
@@ -81,9 +80,9 @@ int NavMesh::ComputeCost(int nodeIndex, int neighborIndex)
 	return 0;
 };
 
-std::vector<int> NavMesh::GetNeighbors(int nodeIndex)
+std::vector<unsigned int> NavMesh::GetNeighbors(unsigned int nodeIndex)
 {
-	std::vector<int> neighbors;
+	std::vector<unsigned int> neighbors;
 
 	int nodeX = nodeIndex % NavMesh::k_w;
 	int nodeY = nodeIndex / NavMesh::k_w;

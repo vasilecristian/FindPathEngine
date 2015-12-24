@@ -29,14 +29,14 @@ namespace fpe
 		* @param goalIndex is the index of the node that represent the target.
 		* @param nodeIndex is the index of the node that you want to calculate the distance.
 		* @return the estimated distance from nodeIndex to goalIndex.*/
-		virtual float ComputeGoalDistanceEstimate(int goalIndex, int nodeIndex) = 0;
+		virtual int ComputeGoalDistanceEstimate(unsigned int goalIndex, unsigned int nodeIndex) = 0;
 
 		/**  Must be implemented in derived class!
 		* This function will calculate the movement cost from a node to a neighbor node.
 		* @param nodeIndex is the node index .
 		* @param neighborIndex is the node index .
 		* @return the cost to move from node to neighbor.*/
-		virtual int ComputeCost(int nodeIndex, int neighborIndex) = 0;
+		virtual int ComputeCost(unsigned int nodeIndex, unsigned int neighborIndex) = 0;
 
 		/** Must be implemented in derived class!
 		* Use this to get all the valid heighbod nodes. A valid node
@@ -44,7 +44,7 @@ namespace fpe
 		* nodes which have collision.
 		* @param nodeIndex is the node that you want to get the neighbors for.
 		* @return a list with neighbor nodes Indexes.*/
-		virtual std::vector<int> GetNeighbors(int nodeIndex) = 0;
+		virtual std::vector<unsigned int> GetNeighbors(unsigned int nodeIndex) = 0;
 	};
 
 	/** Forward declaration. See bellow the real class.*/
@@ -134,7 +134,7 @@ namespace fpe
 
 		/** The constructor
 		* @param index is the index of the node.*/
-		Node(int index)
+		Node(unsigned int index)
 			: m_index(index)
 			, m_parent(nullptr)
 			, m_cost(-1)
@@ -149,7 +149,7 @@ namespace fpe
 
 	private:
 		/** is the index of the node.*/
-		int m_index;
+		unsigned int m_index;
 
 		/** This is the parent node*/
 		std::shared_ptr<Node> m_parent;
@@ -162,13 +162,13 @@ namespace fpe
 
 		/** This the distance to target. It is calculated using a heuristic. It is called also the "H" value.
 		* The function ComputeGoalDistanceEstimate will compute it.*/
-		float m_distToTarget;//"H"
+		int m_distToTarget;//"H"
 
 		/** This is "F" a sum of "G" and "H" */
-		float m_f; // "G" + "H"
+		int m_f; // "G" + "H"
 
 		/** The list with neighbors */
-		std::vector<int> m_neighbors;
+		std::vector<unsigned int> m_neighbors;
 	};
 
 
@@ -181,7 +181,7 @@ namespace fpe
 		* @param startIndex is the start node.
 		* @param goalIndex is the target node 
 		* @param runAsync if is true the path process will run on a separate thread.*/
-		Ticket(int startIndex, int goalIndex, bool runAsync);
+		Ticket(unsigned int startIndex, unsigned int goalIndex, bool runAsync);
 
 		/** Used to describe the possible states of the Ticket.*/
 		enum class State : int
@@ -206,19 +206,19 @@ namespace fpe
 		int GetSteps(){ return m_steps; }
 
 		/** Getter for the detected path. */
-		std::vector<int>& GetFoundPath();
+		std::vector<unsigned int>& GetFoundPath();
 
 		/** Getter for the goal node */
-		int GetGoalIndex(){ return m_goalIndex; }
+		unsigned int GetGoalIndex(){ return m_goalIndex; }
 
 		/** Getter for the start node */
-		int GetStartIndex(){ return m_startIndex; }
+		unsigned int GetStartIndex(){ return m_startIndex; }
 
 		/** Getter for the open list */
-		std::map<int, std::shared_ptr<Node> > GetOpenList();
+		std::map<unsigned int, std::shared_ptr<Node> > GetOpenList();
 
 		/** Getter for the closed list */
-		std::map<int, std::shared_ptr<Node> > GetClosedList();
+		std::map<unsigned int, std::shared_ptr<Node> > GetClosedList();
 
 		/** Use this function to stop the process of path finding.*/
 		void Stop();
@@ -226,10 +226,10 @@ namespace fpe
 	private:
 
 		/** This is the target */
-		std::atomic<int> m_goalIndex;
+		std::atomic<unsigned int> m_goalIndex;
 
 		/** This is the start location */
-		std::atomic<int> m_startIndex;
+		std::atomic<unsigned int> m_startIndex;
 
 		/** Cuttent node processed */
 		std::shared_ptr<Node> m_current;
@@ -241,18 +241,18 @@ namespace fpe
 		std::atomic<int> m_steps;
 
 		/** The list with nodes that represent the detected path */
-		std::vector<int> m_pathFound;
+		std::vector<unsigned int> m_pathFound;
 
 		/** Protect the m_pathFound for multithread access */
 		std::mutex m_pathFoundMutex;
 
 		/** Is the list with possible/available nodes to check.*/
-		std::map<int, std::shared_ptr<Node> > m_openList;
+		std::map<unsigned int, std::shared_ptr<Node> > m_openList;
 
 		std::mutex m_openListMutex;
 
 		/** Is the list with nodes already checked. */
-		std::map<int, std::shared_ptr<Node> > m_closedList;
+		std::map<unsigned int, std::shared_ptr<Node> > m_closedList;
 
 		std::mutex m_closedListMutex;
 

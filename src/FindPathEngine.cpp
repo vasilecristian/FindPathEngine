@@ -26,7 +26,7 @@ namespace fpe
 	}
 
 
-	Ticket::Ticket(int startIndex, int goalIndex, bool runAsync)
+	Ticket::Ticket(unsigned int startIndex, unsigned int goalIndex, bool runAsync)
 		: m_startIndex(startIndex)
 		, m_goalIndex(goalIndex)
 		, m_current(nullptr)
@@ -38,14 +38,14 @@ namespace fpe
 	{
 	}
 
-	std::vector<int>& Ticket::GetFoundPath()
+	std::vector<unsigned int>& Ticket::GetFoundPath()
 	{ 
 		/// protect the m_pathFound for multithread access
 		std::lock_guard<std::mutex> lock(m_pathFoundMutex);
 		return m_pathFound;
 	}
 
-	std::map<int, std::shared_ptr<Node> > Ticket::GetOpenList()
+	std::map<unsigned int, std::shared_ptr<Node> > Ticket::GetOpenList()
 	{ 
 		/// protect the m_openList for multithread access
 		std::lock_guard<std::mutex> lock(m_openListMutex);
@@ -53,7 +53,7 @@ namespace fpe
 		return m_openList; 
 	}
 
-	std::map<int, std::shared_ptr<Node> > Ticket::GetClosedList()
+	std::map<unsigned int, std::shared_ptr<Node> > Ticket::GetClosedList()
 	{ 
 		/// protect the m_closedList for multithread access
 		std::lock_guard<std::mutex> lock(m_closedListMutex);
@@ -264,7 +264,7 @@ namespace fpe
 			neigh->m_cost = m_navMesh->ComputeCost(ticket->m_current->m_index, neighbor);
 
 			/// Calculate the "F" value
-			float f = neigh->m_distToTarget + neigh->m_cost;
+			int f = neigh->m_distToTarget + neigh->m_cost;
 
 			/// If the "F" have the default value it means that this node does not have added 
 			/// to the open list before.
@@ -311,7 +311,7 @@ namespace fpe
 			std::lock_guard<std::mutex> lock(ticket->m_openListMutex);
 
 			/// Get the object with the minimal "F"
-			float f = (float)INT_MAX;
+			int f = INT_MAX;
 			for (auto& on : ticket->m_openList)
 			{
 				if (on.second->m_f < f)
