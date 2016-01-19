@@ -6,7 +6,7 @@
 
 namespace fpe
 {
-	FindPathEngine::FindPathEngine(std::shared_ptr<NavMeshBase> navMesh, unsigned int threadsCount)
+	FindPathEngine::FindPathEngine(std::weak_ptr<NavMeshBase> navMesh, unsigned int threadsCount)
 		: m_navMesh(navMesh)
 		, m_threadsCount(threadsCount)
 		, m_threadsPool(nullptr)
@@ -17,13 +17,19 @@ namespace fpe
 
 	FindPathEngine::~FindPathEngine()
 	{
-		for (auto& ticket : m_tickets)
-		{
-			ticket->Stop();
-		}
+        Finish();
 
 		delete m_threadsPool;
 	}
+
+    void FindPathEngine::Finish()
+    {
+        for (auto& ticket : m_tickets)
+        {
+            ticket->Stop();
+        }
+        this->Update();
+    }
 
 
 	Ticket::Ticket(unsigned int startIndex, unsigned int goalIndex, bool runAsync)
@@ -156,6 +162,14 @@ namespace fpe
 			return true;
 		}
 
+        auto navMesh = m_navMesh.lock();
+        if (navMesh == nullptr)
+        {
+            /// Search is stopped because the m_navMesh is destroied.
+            ticket->m_state = Ticket::State::STOPPED;
+            return true;
+        }
+
 		/// Chekc if the m_start is the same with m_goalIndex
 		if (ticket->m_startIndex == ticket->m_goalIndex)
 		{
@@ -183,7 +197,7 @@ namespace fpe
 				start->m_parent = nullptr;
 
 				/// calculate the distance to target
-				start->m_distToTarget = m_navMesh->ComputeGoalDistanceEstimate(ticket->m_goalIndex, ticket->m_startIndex);
+                start->m_distToTarget = navMesh->ComputeGoalDistanceEstimate(ticket->m_goalIndex, ticket->m_startIndex);
 
 				/// calculate the cost to travel from m_startIndex node to the neighbor note
 				start->m_cost = 0;
@@ -203,7 +217,7 @@ namespace fpe
 		/// If the start node doe not have valid neighbors, try to GetNeighbors and add them to the open list
 		if (ticket->m_current->m_neighbors.size() == 0)
 		{
-			ticket->m_current->m_neighbors = m_navMesh->GetNeighbors(ticket->m_current->m_index);// ticket->m_current->GetNeighbors();
+            ticket->m_current->m_neighbors = navMesh->GetNeighbors(ticket->m_current->m_index);// ticket->m_current->GetNeighbors();
 		}
 
 		for (auto& neighbor : ticket->m_current->m_neighbors)
@@ -258,10 +272,10 @@ namespace fpe
 
 
 			/// calculate the distance to target
-			neigh->m_distToTarget = m_navMesh->ComputeGoalDistanceEstimate(ticket->m_goalIndex, neighbor);
+            neigh->m_distToTarget = navMesh->ComputeGoalDistanceEstimate(ticket->m_goalIndex, neighbor);
 
 			/// calculate the cost to travel from m_startIndex node to the neighbor note
-			neigh->m_cost = m_navMesh->ComputeCost(ticket->m_current->m_index, neighbor);
+            neigh->m_cost = navMesh->ComputeCost(ticket->m_current->m_index, neighbor);
 
 			/// Calculate the "F" value
 			int f = neigh->m_distToTarget + neigh->m_cost;

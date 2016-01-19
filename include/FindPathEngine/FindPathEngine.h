@@ -79,9 +79,15 @@ namespace fpe
 		/** The constructor.
 		* @param navMesh is a pointer to the user's navmesh class.
 		* @param is the number of threads used to calculate the paths*/
-		FindPathEngine(std::shared_ptr<NavMeshBase> navMesh, unsigned int threadsCount);
+        FindPathEngine(std::weak_ptr<NavMeshBase> navMesh, unsigned int threadsCount);
 
+        /** The destructor will call Finish() for you, and will delete the m_threadsPool.*/
 		~FindPathEngine();
+
+        /** Use this function to signal all jobs in progress to finish. This function will
+        * send the stop signal and will call Update() once again for the paths that are
+        * calculated on the main thread.*/
+        void Finish();
 
 		/** Add a new request to determine a path */
 		void AddTicket(std::shared_ptr<Ticket> ticket);
@@ -100,7 +106,7 @@ namespace fpe
 	private:
 
 		/** Is a pointer to the used's nav mesh. */
-		std::shared_ptr<NavMeshBase> m_navMesh;
+        std::weak_ptr<NavMeshBase> m_navMesh;
 
 
 		/** Update a ticket (aka a search request). This will make another step forward
@@ -118,6 +124,8 @@ namespace fpe
 		/** Is a list with tickets that must be processed. */
 		std::vector<std::shared_ptr<Ticket> > m_tickets;
 
+        /** This is the number of threads that will be used to calculate the paths. 
+        * Each thread will calculate a path at a time.*/
 		unsigned int m_threadsCount;
 
 		/** This is the Thread Pool.*/
