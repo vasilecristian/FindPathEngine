@@ -111,18 +111,21 @@ namespace fpe
 
 		/** Update a ticket (aka a search request). This will make another step forward
 		* to search the path.
-		* @param ticket is the request processed
+		* @param weakTicket is the request processed
 		* @return true if the job is finished. Return false if the job need to be processed also at the next step.*/
-		bool ProcessTicket(std::shared_ptr<Ticket> ticket);
+        bool ProcessTicket(std::weak_ptr<Ticket> weakTicket);
 
 		/** This function is used as a job for the threads pool.
 		* This function is blockant, so the thread that will process this,
 		* will end when the path is calculated.
 		* @param ticket is the request processed*/
-		void ProcessTicketAsync(std::shared_ptr<Ticket> ticket);
+        void ProcessTicketAsync(std::weak_ptr<Ticket> ticket);
 
 		/** Is a list with tickets that must be processed. */
 		std::vector<std::shared_ptr<Ticket> > m_tickets;
+
+        /** Mutex to protect the access to m_tickets*/
+        std::recursive_mutex m_ticketsMutex;
 
         /** This is the number of threads that will be used to calculate the paths. 
         * Each thread will calculate a path at a time.*/

@@ -24,11 +24,21 @@ namespace fpe
 
     void FindPathEngine::Finish()
     {
+        m_ticketsMutex.lock();
         for (auto& ticket : m_tickets)
         {
             ticket->Stop();
         }
-        this->Update();
+        m_ticketsMutex.unlock();
+
+        while (true)
+        {
+            this->Update();
+
+            std::lock_guard<std::recursive_mutex> lock(m_ticketsMutex);
+            if (m_tickets.size() == 0)
+                break;
+        }
     }
 
 
@@ -79,6 +89,7 @@ namespace fpe
 	/** Add a new request to determine a path */
 	void FindPathEngine::AddTicket(std::shared_ptr<Ticket> ticket)
 	{
+        std::lock_guard<std::recursive_mutex> lock(m_ticketsMutex);
 		m_tickets.push_back(ticket);
 	}
 
@@ -88,34 +99,38 @@ namespace fpe
 	* @return true if pending list with tickets is empty.*/
 	bool FindPathEngine::Update()
 	{
+        std::lock_guard<std::recursive_mutex> lock(m_ticketsMutex);
+
 		/// Check the state of all tickets. 
 		/// If the ticket was processed, just remove it from the list.
 		for (auto it = m_tickets.begin(); it != m_tickets.end();)
 		{
+            auto ticket = (*it);
+
 			/// Check if the thread pool is ok. The thread pool can be null
 			/// because the threadsCount parameter in the constructor is 0!
-			if ((m_threadsPool == nullptr) && ((*it)->m_runAsync))
+            if ((m_threadsPool == nullptr) && (ticket->m_runAsync))
 			{
 				/// In this case if a job is supposed to run async, will be executed on 
 				/// the same thread (with Update function). So, change the runAsync flag to false.
-				(*it)->m_runAsync = false;
+                ticket->m_runAsync = false;
 			}
 
-			if ((*it)->m_runAsync)
+            if (ticket->m_runAsync)
 			{
 				/// If the Ticket must be processed async (aka on a separate thread)
 
-				if (!(*it)->m_runAsyncQueued)
+                if (!ticket->m_runAsyncQueued)
 				{
 					/// If the ticket was not already started, Add a job to the thread pool.
-					(*it)->m_runAsyncQueued = true;
-					m_threadsPool->AddJob(std::bind(&FindPathEngine::ProcessTicketAsync, this->shared_from_this(), (*it)));
+                    ticket->m_runAsyncQueued = true;
+                    m_threadsPool->AddJob(std::bind(&FindPathEngine::ProcessTicketAsync, this->shared_from_this(), ticket));
 				}
 				else
 				{
 					/// Check if the ticket was processed. 
-					if (((*it)->m_state == Ticket::State::COMPLETED)
-					 || ((*it)->m_state == Ticket::State::STOPPED))
+                    if ((ticket->m_state == Ticket::State::COMPLETED)
+                        || (ticket->m_state == Ticket::State::STOPPED))
 					{
 						/// Remove the ticket from the list.
 						it = m_tickets.erase(it);
@@ -126,7 +141,7 @@ namespace fpe
 
 			/// If the ticket must be processed on the same thread with Update(),
 			/// Just check what ProcessTicket function returns. 
-			else if (ProcessTicket((*it)))
+            else if (ProcessTicket(ticket))
 			{
 				/// Remove the ticket from the list.
 				it = m_tickets.erase(it);
@@ -140,7 +155,7 @@ namespace fpe
 		return (m_tickets.size() == 0);
 	}
 
-	void FindPathEngine::ProcessTicketAsync(std::shared_ptr<Ticket> ticket)
+    void FindPathEngine::ProcessTicketAsync(std::weak_ptr<Ticket> ticket)
 	{
 		while (!ProcessTicket(ticket))
 		{
@@ -148,8 +163,15 @@ namespace fpe
 		}
 	}
 
-	bool FindPathEngine::ProcessTicket(std::shared_ptr<Ticket> ticket)
+    bool FindPathEngine::ProcessTicket(std::weak_ptr<Ticket> weakTicket)
 	{
+        auto ticket = weakTicket.lock();
+        if (ticket == nullptr)
+        {
+            /// Search is stopped because the ticket is destroied.
+            ticket->m_state = Ticket::State::STOPPED;
+            return true;
+        }
 		ticket->m_state = Ticket::State::PROCESSING;
 
 		ticket->m_steps++;
