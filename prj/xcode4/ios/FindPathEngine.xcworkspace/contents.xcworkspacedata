@@ -5,6 +5,9 @@
 		location = "group:../../../../ThreadPool/prj/xcode4/ios/ThreadPool.xcodeproj">
 	</FileRef>
 	<FileRef
+		location = "group:../../../../MemoryLeaksTracker/prj/xcode4/ios/MemoryLeaksTracker.xcodeproj">
+	</FileRef>
+	<FileRef
 		location = "group:FindPathEngine.xcodeproj">
 	</FileRef>
 	<FileRef

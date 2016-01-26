@@ -209,6 +209,9 @@
     <ProjectReference Include="..\..\..\ThreadPool\prj\vs2013_w81\ThreadPool.vcxproj">
       <Project>{77E74159-639F-83A6-CCA6-5C02B87D1E97}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\..\MemoryLeaksTracker\prj\vs2013_w81\MemoryLeaksTracker.vcxproj">
+      <Project>{3A25EAA2-2609-ABF8-8F69-A54B7B6C957A}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

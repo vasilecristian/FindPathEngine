@@ -7,37 +7,52 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		009BB29BA7CF9285C6FDD0DB /* libThreadPool_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B7994C632058CD0DE93E62A3 /* libThreadPool_d.a */; };
-		17F5CCBC79CEDBA67C374AFC /* libFindPathEngine_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B382F6446C9EC5EE873B6C84 /* libFindPathEngine_d.a */; };
 		1A4D60D6760424404136AF16 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6496DAD43919F1FEFACD0114 /* main.cpp */; };
+		24CD5AA1D174710B5E4488E1 /* libMemoryLeaksTracker_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E44417093AEB7E33388C3D49 /* libMemoryLeaksTracker_d.a */; };
+		8E3437F8F920F062A5ECA638 /* libThreadPool_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2941BC0DA12E4EA9CB58200 /* libThreadPool_d.a */; };
+		C2C131991BDBD903DC50FFD9 /* libFindPathEngine_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CA2FD521C2BBAD4BA35C9B61 /* libFindPathEngine_d.a */; };
 		E24F4881B6D25FAB78856EC1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C3DD49D46D6D333B53FB89 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		501C08CE6196E9B883DCC70E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 54FE92494D8A6A732E2B5889 /* ThreadPool.xcodeproj */;
+			containerPortal = B28C26461B4BA6F0E4313C86 /* ThreadPool.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = A36ABF1514CBAE3F3097E555;
 			remoteInfo = ThreadPool;
 		};
 		67930307790DE3F19B53C147 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 54FE92494D8A6A732E2B5889 /* ThreadPool.xcodeproj */;
+			containerPortal = B28C26461B4BA6F0E4313C86 /* ThreadPool.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = BC962B5B2CA0DD45A997899B;
 			remoteInfo = ThreadPool;
 		};
+		7472C931BC8CF41BE32DC771 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8ABD544F5223F2F958992A8F /* MemoryLeaksTracker.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5F420F587A8C888261517598;
+			remoteInfo = MemoryLeaksTracker;
+		};
+		8BE9C36AD403EE54FAA4C1AA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8ABD544F5223F2F958992A8F /* MemoryLeaksTracker.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F0D2FF3E4EBDFB281F6E9D7E;
+			remoteInfo = MemoryLeaksTracker;
+		};
 		E17F168005F45C6A67F4F4C0 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 1E0E2D1F74B594497256535F /* FindPathEngine.xcodeproj */;
+			containerPortal = 6263E09C1B7FB046361C56DC /* FindPathEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 906C880799A4FC31A042CE47;
 			remoteInfo = FindPathEngine;
 		};
 		F8F610B91D6B56A37F6BEEF9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 1E0E2D1F74B594497256535F /* FindPathEngine.xcodeproj */;
+			containerPortal = 6263E09C1B7FB046361C56DC /* FindPathEngine.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 57299E0D4FAF34F786301C4D;
 			remoteInfo = FindPathEngine;
@@ -47,9 +62,10 @@
 /* Begin PBXFileReference section */
 		06C3DD49D46D6D333B53FB89 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		12D3AC85765B866F8BBE0AC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Info.plist; sourceTree = "<group>"; };
-		1E0E2D1F74B594497256535F /* libFindPathEngine_d.a */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FindPathEngine.xcodeproj"; path = FindPathEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
-		54FE92494D8A6A732E2B5889 /* libThreadPool_d.a */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ThreadPool.xcodeproj"; path = ../../../../ThreadPool/prj/xcode4/ios/ThreadPool.xcodeproj; sourceTree = SOURCE_ROOT; };
+		6263E09C1B7FB046361C56DC /* libFindPathEngine_d.a */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FindPathEngine.xcodeproj"; path = FindPathEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
 		6496DAD43919F1FEFACD0114 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../test/main.cpp; sourceTree = "<group>"; };
+		8ABD544F5223F2F958992A8F /* libMemoryLeaksTracker_d.a */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "MemoryLeaksTracker.xcodeproj"; path = ../../../../MemoryLeaksTracker/prj/xcode4/ios/MemoryLeaksTracker.xcodeproj; sourceTree = SOURCE_ROOT; };
+		B28C26461B4BA6F0E4313C86 /* libThreadPool_d.a */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ThreadPool.xcodeproj"; path = ../../../../ThreadPool/prj/xcode4/ios/ThreadPool.xcodeproj; sourceTree = SOURCE_ROOT; };
 		E942D732F469F3DCF0716D72 /* test */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = test; path = test.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -59,8 +75,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				E24F4881B6D25FAB78856EC1 /* Foundation.framework in Frameworks */,
-				17F5CCBC79CEDBA67C374AFC /* libFindPathEngine_d.a in Frameworks */,
-				009BB29BA7CF9285C6FDD0DB /* libThreadPool_d.a in Frameworks */,
+				C2C131991BDBD903DC50FFD9 /* libFindPathEngine_d.a in Frameworks */,
+				8E3437F8F920F062A5ECA638 /* libThreadPool_d.a in Frameworks */,
+				24CD5AA1D174710B5E4488E1 /* libMemoryLeaksTracker_d.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,7 +87,7 @@
 		2A48DF00FCD80FAA2E5BF540 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B382F6446C9EC5EE873B6C84 /* libFindPathEngine_d.a */,
+				CA2FD521C2BBAD4BA35C9B61 /* libFindPathEngine_d.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -106,16 +123,25 @@
 		581EEAC54FB7EDAF2070E905 /* Projects */ = {
 			isa = PBXGroup;
 			children = (
-				1E0E2D1F74B594497256535F /* FindPathEngine.xcodeproj */,
-				54FE92494D8A6A732E2B5889 /* ThreadPool.xcodeproj */,
+				6263E09C1B7FB046361C56DC /* FindPathEngine.xcodeproj */,
+				B28C26461B4BA6F0E4313C86 /* ThreadPool.xcodeproj */,
+				8ABD544F5223F2F958992A8F /* MemoryLeaksTracker.xcodeproj */,
 			);
 			name = Projects;
+			sourceTree = "<group>";
+		};
+		5D487F914FF3F53BC57CB5D1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E44417093AEB7E33388C3D49 /* libMemoryLeaksTracker_d.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		C8C9BF8EE0972B388C4BB5CE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B7994C632058CD0DE93E62A3 /* libThreadPool_d.a */,
+				B2941BC0DA12E4EA9CB58200 /* libThreadPool_d.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -148,6 +174,7 @@
 			dependencies = (
 				CAADA9A99D3CDA53CEC0BFE9 /* PBXTargetDependency */,
 				692E8A3780FBF5E12CB08077 /* PBXTargetDependency */,
+				FDAD4A3AF058BFE465E1807A /* PBXTargetDependency */,
 			);
 			name = test;
 			productInstallPath = "$(HOME)/Applications";
@@ -175,11 +202,15 @@
 			projectReferences = (
 				{
 					ProductGroup = 2A48DF00FCD80FAA2E5BF540 /* Products */;
-					ProjectRef = 1E0E2D1F74B594497256535F /* FindPathEngine.xcodeproj */;
+					ProjectRef = 6263E09C1B7FB046361C56DC /* FindPathEngine.xcodeproj */;
+				},
+				{
+					ProductGroup = 5D487F914FF3F53BC57CB5D1 /* Products */;
+					ProjectRef = 8ABD544F5223F2F958992A8F /* MemoryLeaksTracker.xcodeproj */;
 				},
 				{
 					ProductGroup = C8C9BF8EE0972B388C4BB5CE /* Products */;
-					ProjectRef = 54FE92494D8A6A732E2B5889 /* ThreadPool.xcodeproj */;
+					ProjectRef = B28C26461B4BA6F0E4313C86 /* ThreadPool.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -190,18 +221,25 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		B382F6446C9EC5EE873B6C84 /* libFindPathEngine_d.a */ = {
+		B2941BC0DA12E4EA9CB58200 /* libThreadPool_d.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libThreadPool_d.a;
+			remoteRef = 501C08CE6196E9B883DCC70E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CA2FD521C2BBAD4BA35C9B61 /* libFindPathEngine_d.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFindPathEngine_d.a;
 			remoteRef = E17F168005F45C6A67F4F4C0 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		B7994C632058CD0DE93E62A3 /* libThreadPool_d.a */ = {
+		E44417093AEB7E33388C3D49 /* libMemoryLeaksTracker_d.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
-			path = libThreadPool_d.a;
-			remoteRef = 501C08CE6196E9B883DCC70E /* PBXContainerItemProxy */;
+			path = libMemoryLeaksTracker_d.a;
+			remoteRef = 7472C931BC8CF41BE32DC771 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -238,6 +276,11 @@
 			name = FindPathEngine;
 			targetProxy = F8F610B91D6B56A37F6BEEF9 /* PBXContainerItemProxy */;
 		};
+		FDAD4A3AF058BFE465E1807A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = MemoryLeaksTracker;
+			targetProxy = 8BE9C36AD403EE54FAA4C1AA /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -262,6 +305,7 @@
 				COMMON_HEADER_SEARCH_PATHS = (
 					../../../include,
 					../../../../ThreadPool/include,
+					../../../../MemoryLeaksTracker/include,
 				);
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
@@ -324,6 +368,7 @@
 				COMMON_HEADER_SEARCH_PATHS = (
 					../../../include,
 					../../../../ThreadPool/include,
+					../../../../MemoryLeaksTracker/include,
 				);
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
@@ -390,6 +435,7 @@
 				COMMON_HEADER_SEARCH_PATHS = (
 					../../../include,
 					../../../../ThreadPool/include,
+					../../../../MemoryLeaksTracker/include,
 				);
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
@@ -454,6 +500,7 @@
 				COMMON_HEADER_SEARCH_PATHS = (
 					../../../include,
 					../../../../ThreadPool/include,
+					../../../../MemoryLeaksTracker/include,
 				);
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";

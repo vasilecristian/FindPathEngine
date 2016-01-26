@@ -8,7 +8,7 @@
     <PrecompiledHeader>NotUsing</PrecompiledHeader>
     <WarningLevel>Level3</WarningLevel>
     <PreprocessorDefinitions>_DEBUG;_SCL_SECURE_NO_WARNINGS;_CRT_SECURE_NO_WARNINGS;_WINSOCK_DEPRECATED_NO_WARNINGS;OS_WP8;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-    <AdditionalIncludeDirectories>..\..\include;..\..\..\ThreadPool\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    <AdditionalIncludeDirectories>..\..\include;..\..\..\ThreadPool\include;..\..\..\MemoryLeaksTracker\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <ProgramDataBaseFileName>$(IntDir)vc$(PlatformToolsetVersion).pdb</ProgramDataBaseFileName>
       <Optimization>Disabled</Optimization>

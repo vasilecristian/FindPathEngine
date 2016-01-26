@@ -1,7 +1,7 @@
 // ConsoleApplication1.cpp : Defines the entry point for the console application.
 //
 
-
+#include "MemoryLeaksTracker/MemoryLT.h"
 #include "FindPathEngine/FindPathEngine.h"
 
 
@@ -29,12 +29,12 @@ public:
 const int NavMesh::k_collisions[NavMesh::k_meshSize] = {
 /*    0  1  2  3  4  5  6  7  */
 /*0*/ 1, 1, 1, 1, 1, 1, 1, 1,
-/*1*/ 1, 0, 0, 0, 0, 0, 0, 1,
-/*2*/ 1, 0, 0, 0, 0, 0, 0, 1,
-/*3*/ 1, 0, 0, 0, 0, 0, 0, 1,
-/*4*/ 1, 0, 0, 0, 0, 0, 0, 1,
-/*5*/ 1, 0, 0, 0, 0, 0, 0, 1,
-/*6*/ 1, 0, 0, 0, 0, 0, 0, 1,
+/*1*/ 1, 0, 1, 0, 0, 0, 0, 1,
+/*2*/ 1, 0, 1, 0, 1, 1, 0, 1,
+/*3*/ 1, 0, 1, 0, 1, 0, 1, 1,
+/*4*/ 1, 0, 1, 0, 1, 1, 0, 1,
+/*5*/ 1, 0, 1, 0, 1, 0, 1, 1,
+/*6*/ 1, 0, 0, 1, 1, 1, 0, 1,
 /*7*/ 1, 1, 1, 1, 1, 1, 1, 1
 };
 
@@ -122,13 +122,16 @@ std::vector<unsigned int> NavMesh::GetNeighbors(unsigned int nodeIndex)
 
 int main(int argc, char* argv[])
 {
-	std::shared_ptr<NavMesh> navmesh = std::make_shared<NavMesh>();
+	std::shared_ptr<NavMesh> navmesh = std::shared_ptr<NavMesh>(NEW NavMesh());
 
-	std::shared_ptr<fpe::FindPathEngine> engine = std::make_shared<fpe::FindPathEngine>(navmesh, 0);
+	std::shared_ptr<fpe::FindPathEngine> engine = std::make_shared<fpe::FindPathEngine>(navmesh, 2);
+    std::shared_ptr<fpe::Ticket> ticket = nullptr;
+    for (int i = 0; i < 1000; i++)
+    {
+        ticket = std::make_shared<fpe::Ticket>(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 6), true);
 
-	std::shared_ptr<fpe::Ticket> ticket = std::make_shared<fpe::Ticket>(NavMesh::GetIndex(1, 1), NavMesh::GetIndex(6, 6), true);
-
-	engine->AddTicket(ticket);
+        engine->AddTicket(ticket);
+    }
 
 	while (!engine->Update())
 	{

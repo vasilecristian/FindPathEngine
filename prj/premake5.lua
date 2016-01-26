@@ -4,11 +4,13 @@ include "../../premake/common/"
 solution "FindPathEngine"
     addCommonConfig()
 	
-	
 external "ThreadPool"
     location  ("../../ThreadPool/prj/"  .. GetPathFromPlatform() )
     kind "StaticLib"	
     
+external "MemoryLeaksTracker"
+    location  ("../../MemoryLeaksTracker/prj/"  .. GetPathFromPlatform() )
+    kind "StaticLib"
     
 project "FindPathEngine"
     files
@@ -93,7 +95,8 @@ project "test"
 	includedirs 
 	{ 
 		"../include",
-		"../../ThreadPool/include/"
+		"../../ThreadPool/include/",
+		"../../MemoryLeaksTracker/include"
 	}
 				
 	--removeflags "NoRTTI"
@@ -124,6 +127,7 @@ project "test"
 	links {
 		"FindPathEngine",
 		"ThreadPool",
+		"MemoryLeaksTracker"
 		}
 
 	targetname( "test" )
