@@ -1,0 +1,27 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../src/FindPathEngine.cpp">
+    <Files>
+      <File FileName="../../src/FindPathEngine.cpp" Line="290" Column="44" />
+      <File FileName="../../include/FindPathEngine/FindPathEngine.h" Line="229" Column="64" />
+      <File FileName="../../test/main.cpp" Line="130" Column="6" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="FindPathEngine" expanded="True">
+            <Node name="FindPathEngine" expanded="True">
+              <Node name="FindPathEngine.cpp" selected="True" />
+            </Node>
+            <Node name="test" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|Win32" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
