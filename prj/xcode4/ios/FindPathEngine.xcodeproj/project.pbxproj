@@ -12,7 +12,7 @@
 
 /* Begin PBXFileReference section */
 		83EDC79C207F7946D38F7DDC /* FindPathEngine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = FindPathEngine.h; path = ../../../include/FindPathEngine/FindPathEngine.h; sourceTree = "<group>"; };
-		906C880799A4FC31A042CE47 /* FindPathEngine */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = FindPathEngine; path = libFindPathEngine_d.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		906C880799A4FC31A042CE47 /* libFindPathEngine_d.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libFindPathEngine_d.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDA7DCC310E32FAD76CBDB03 /* FindPathEngine.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = FindPathEngine.cpp; path = ../../../src/FindPathEngine.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,15 +64,12 @@
 		EA8E290FE2272BF9B2E0274F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				906C880799A4FC31A042CE47 /* FindPathEngine */,
+				906C880799A4FC31A042CE47 /* libFindPathEngine_d.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		57299E0D4FAF34F786301C4D /* FindPathEngine */ = {
@@ -82,7 +79,6 @@
 				DBABF9974D0CE8C168D91FD7 /* Resources */,
 				7561814EE6C27078028EA78E /* Sources */,
 				59DB14F7CB3C0421E7083B37 /* Frameworks */,
-				A23E92429AC4292CD1451082 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -90,7 +86,7 @@
 			);
 			name = FindPathEngine;
 			productName = FindPathEngine;
-			productReference = 906C880799A4FC31A042CE47 /* FindPathEngine */;
+			productReference = 906C880799A4FC31A042CE47 /* libFindPathEngine_d.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -99,16 +95,16 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-					57299E0D4FAF34F786301C4D = {
-					};
-				};
 			};
 			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "FindPathEngine" */;
 			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+				Base,
+			);
 			mainGroup = 060A363EBD5AC3A80F7DC47E /* FindPathEngine */;
-			productRefGroup = 2A48DF00FCD80FAA2E5BF540 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -138,9 +134,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXVariantGroup section */
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		39B73F1C4B3220066D77FD5C /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -156,12 +149,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
-				COMMON_HEADER_SEARCH_PATHS = (
-					../../../include,
-					../../../src,
-					../../../../ThreadPool/include,
-				);
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COMMON_HEADER_SEARCH_PATHS = "../../../include ../../../src ../../../../ThreadPool/include";
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
@@ -229,12 +218,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
-				COMMON_HEADER_SEARCH_PATHS = (
-					../../../include,
-					../../../src,
-					../../../../ThreadPool/include,
-				);
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COMMON_HEADER_SEARCH_PATHS = "../../../include ../../../src ../../../../ThreadPool/include";
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
@@ -301,11 +286,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
-				COMMON_HEADER_SEARCH_PATHS = (
-					../../../include,
-					../../../src,
-					../../../../ThreadPool/include,
-				);
+				COMMON_HEADER_SEARCH_PATHS = "../../../include ../../../src ../../../../ThreadPool/include";
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
@@ -373,11 +354,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
-				COMMON_HEADER_SEARCH_PATHS = (
-					../../../include,
-					../../../src,
-					../../../../ThreadPool/include,
-				);
+				COMMON_HEADER_SEARCH_PATHS = "../../../include ../../../src ../../../../ThreadPool/include";
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
