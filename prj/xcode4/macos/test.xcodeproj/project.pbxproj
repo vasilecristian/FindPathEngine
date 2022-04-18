@@ -61,12 +61,12 @@
 
 /* Begin PBXFileReference section */
 		06C3DD49D46D6D333B53FB89 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		12D3AC85765B866F8BBE0AC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Info.plist; sourceTree = "<group>"; };
-		25E7426F9B90D1992F3868AF /* libMemoryLeaksTracker_d.a */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "MemoryLeaksTracker.xcodeproj"; path = ../../../../MemoryLeaksTracker/prj/xcode4/ios/MemoryLeaksTracker.xcodeproj; sourceTree = SOURCE_ROOT; };
+		12D3AC85765B866F8BBE0AC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		25E7426F9B90D1992F3868AF /* MemoryLeaksTracker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MemoryLeaksTracker.xcodeproj; path = ../../../../MemoryLeaksTracker/prj/xcode4/ios/MemoryLeaksTracker.xcodeproj; sourceTree = SOURCE_ROOT; };
 		6496DAD43919F1FEFACD0114 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../test/main.cpp; sourceTree = "<group>"; };
-		A11EA37CE630A3A699D469BC /* libFindPathEngine_d.a */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "FindPathEngine.xcodeproj"; path = FindPathEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
-		A987AEA6E5109FD05DB214E6 /* libThreadPool_d.a */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "ThreadPool.xcodeproj"; path = ../../../../ThreadPool/prj/xcode4/ios/ThreadPool.xcodeproj; sourceTree = SOURCE_ROOT; };
-		E942D732F469F3DCF0716D72 /* test */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; name = test; path = test.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A11EA37CE630A3A699D469BC /* FindPathEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FindPathEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
+		A987AEA6E5109FD05DB214E6 /* ThreadPool.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ThreadPool.xcodeproj; path = ../../../../ThreadPool/prj/xcode4/ios/ThreadPool.xcodeproj; sourceTree = SOURCE_ROOT; };
+		E942D732F469F3DCF0716D72 /* test_d.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test_d.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,15 +149,12 @@
 		EA8E290FE2272BF9B2E0274F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E942D732F469F3DCF0716D72 /* test */,
+				E942D732F469F3DCF0716D72 /* test_d.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		238D33D8CE8E634298220218 /* test */ = {
@@ -167,7 +164,6 @@
 				03EE3C5382804EFDC20A9293 /* Resources */,
 				9DA3C40A1C35D6B45BC01A4A /* Sources */,
 				821D57B300AF6A5D4039ADF3 /* Frameworks */,
-				1FD8AB7EF766B5E8A7C059BE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -179,7 +175,7 @@
 			name = test;
 			productInstallPath = "$(HOME)/Applications";
 			productName = test;
-			productReference = E942D732F469F3DCF0716D72 /* test */;
+			productReference = E942D732F469F3DCF0716D72 /* test_d.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -188,16 +184,16 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				TargetAttributes = {
-					238D33D8CE8E634298220218 = {
-					};
-				};
 			};
 			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "test" */;
 			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
 			hasScannedForEncodings = 1;
+			knownRegions = (
+				en,
+				Base,
+			);
 			mainGroup = 544595F165C076DB88065431 /* test */;
-			productRefGroup = F0CB3ABCFA03AEE600A180FC /* Products */;
 			projectDirPath = "";
 			projectReferences = (
 				{
@@ -283,9 +279,6 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
 		1D80138988E178B3D40AF9C9 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -302,11 +295,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
-				COMMON_HEADER_SEARCH_PATHS = (
-					../../../include,
-					../../../../ThreadPool/include,
-					../../../../MemoryLeaksTracker/include,
-				);
+				COMMON_HEADER_SEARCH_PATHS = "../../../include ../../../../ThreadPool/include ../../../../MemoryLeaksTracker/include";
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
@@ -364,12 +353,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
-				COMMON_HEADER_SEARCH_PATHS = (
-					../../../include,
-					../../../../ThreadPool/include,
-					../../../../MemoryLeaksTracker/include,
-				);
+				CODE_SIGN_IDENTITY = "Apple Development";
+				COMMON_HEADER_SEARCH_PATHS = "../../../include ../../../../ThreadPool/include ../../../../MemoryLeaksTracker/include";
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
@@ -404,14 +389,14 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "\"$(HOME)/Applications\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = ../../../lib/xcode4/ios;
+				LIBRARY_SEARCH_PATHS = ../../../lib/xcode4/macos;
 				OBJROOT = obj/Release/test;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = test;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
-				SYMROOT = ../../../build/xcode4/ios;
+				SYMROOT = ../../../build/xcode4/macos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
@@ -431,12 +416,8 @@
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
-				COMMON_HEADER_SEARCH_PATHS = (
-					../../../include,
-					../../../../ThreadPool/include,
-					../../../../MemoryLeaksTracker/include,
-				);
+				CODE_SIGN_IDENTITY = "Apple Development";
+				COMMON_HEADER_SEARCH_PATHS = "../../../include ../../../../ThreadPool/include ../../../../MemoryLeaksTracker/include";
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
@@ -469,14 +450,14 @@
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "\"$(HOME)/Applications\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = ../../../lib/xcode4/ios;
+				LIBRARY_SEARCH_PATHS = ../../../lib/xcode4/macos;
 				OBJROOT = obj/Debug/test;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = test_d;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
-				SYMROOT = ../../../build/xcode4/ios;
+				SYMROOT = ../../../build/xcode4/macos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 			};
@@ -497,11 +478,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Valeri Vuchov (WDTMDP2J2J)";
-				COMMON_HEADER_SEARCH_PATHS = (
-					../../../include,
-					../../../../ThreadPool/include,
-					../../../../MemoryLeaksTracker/include,
-				);
+				COMMON_HEADER_SEARCH_PATHS = "../../../include ../../../../ThreadPool/include ../../../../MemoryLeaksTracker/include";
 				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
 				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
