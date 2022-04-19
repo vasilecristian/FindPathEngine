@@ -1,4 +1,9 @@
 
 *.a
-*.xcuserstate
-*.xcuserstate
+/prj/xcode4/macos/obj
+/prj/xcode4/ios/obj
+/prj/xcode4/macos/test.xcodeproj/xcuserdata
+/prj/xcode4/macos/test.xcodeproj/project.xcworkspace/xcuserdata
+/prj/xcode4/ios/test.xcodeproj/xcuserdata
+/prj/xcode4/ios/test.xcodeproj/project.xcworkspace/xcuserdata
+
