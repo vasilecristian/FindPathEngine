@@ -3,506 +3,382 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 55;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A4D60D6760424404136AF16 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6496DAD43919F1FEFACD0114 /* main.cpp */; };
-		22824CB9266B54A3C7CD6AF9 /* libFindPathEngine_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 59930A414F5AB2EBF8012081 /* libFindPathEngine_d.a */; };
-		B99C78982C62D1822D9836D8 /* libThreadPool_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 14F44660B312200A9BDEFCA0 /* libThreadPool_d.a */; };
-		E24F4881B6D25FAB78856EC1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 06C3DD49D46D6D333B53FB89 /* Foundation.framework */; };
+		24889CB8281063AD00EA2BE4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 24889CB7281063AD00EA2BE4 /* main.cpp */; };
+		24889CCA281063E800EA2BE4 /* libFindPathEngine_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24889CBE281063B700EA2BE4 /* libFindPathEngine_d.a */; };
+		24889CCB281063EB00EA2BE4 /* libThreadPool_d.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24889CC4281063CA00EA2BE4 /* libThreadPool_d.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		501C08CE6196E9B883DCC70E /* PBXContainerItemProxy */ = {
+		24889CBD281063B700EA2BE4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A987AEA6E5109FD05DB214E6 /* ThreadPool.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = A36ABF1514CBAE3F3097E555;
-			remoteInfo = ThreadPool;
-		};
-		67930307790DE3F19B53C147 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A987AEA6E5109FD05DB214E6 /* ThreadPool.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BC962B5B2CA0DD45A997899B;
-			remoteInfo = ThreadPool;
-		};
-		E17F168005F45C6A67F4F4C0 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = A11EA37CE630A3A699D469BC /* FindPathEngine.xcodeproj */;
+			containerPortal = 24889CB9281063B700EA2BE4 /* FindPathEngine.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 906C880799A4FC31A042CE47;
 			remoteInfo = FindPathEngine;
 		};
-		F8F610B91D6B56A37F6BEEF9 /* PBXContainerItemProxy */ = {
+		24889CC3281063CA00EA2BE4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = A11EA37CE630A3A699D469BC /* FindPathEngine.xcodeproj */;
+			containerPortal = 24889CBF281063CA00EA2BE4 /* ThreadPool.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = A36ABF1514CBAE3F3097E555;
+			remoteInfo = ThreadPool;
+		};
+		24889CC5281063D500EA2BE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24889CBF281063CA00EA2BE4 /* ThreadPool.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BC962B5B2CA0DD45A997899B;
+			remoteInfo = ThreadPool;
+		};
+		24889CC7281063D800EA2BE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 24889CB9281063B700EA2BE4 /* FindPathEngine.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 57299E0D4FAF34F786301C4D;
 			remoteInfo = FindPathEngine;
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		24889CAB2810620C00EA2BE4 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		06C3DD49D46D6D333B53FB89 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		12D3AC85765B866F8BBE0AC5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6496DAD43919F1FEFACD0114 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../test/main.cpp; sourceTree = "<group>"; };
-		A11EA37CE630A3A699D469BC /* FindPathEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FindPathEngine.xcodeproj; sourceTree = SOURCE_ROOT; };
-		A987AEA6E5109FD05DB214E6 /* ThreadPool.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ThreadPool.xcodeproj; path = ../../../../ThreadPool/prj/xcode4/ios/ThreadPool.xcodeproj; sourceTree = SOURCE_ROOT; };
-		E942D732F469F3DCF0716D72 /* test_d.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = test_d.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		24889CAD2810620C00EA2BE4 /* test */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = test; sourceTree = BUILT_PRODUCTS_DIR; };
+		24889CB7281063AD00EA2BE4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../test/main.cpp; sourceTree = "<group>"; };
+		24889CB9281063B700EA2BE4 /* FindPathEngine.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = FindPathEngine.xcodeproj; sourceTree = "<group>"; };
+		24889CBF281063CA00EA2BE4 /* ThreadPool.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ThreadPool.xcodeproj; path = ../../../../ThreadPool/prj/xcode4/macos/ThreadPool.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		821D57B300AF6A5D4039ADF3 /* Frameworks */ = {
+		24889CAA2810620C00EA2BE4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E24F4881B6D25FAB78856EC1 /* Foundation.framework in Frameworks */,
-				22824CB9266B54A3C7CD6AF9 /* libFindPathEngine_d.a in Frameworks */,
-				B99C78982C62D1822D9836D8 /* libThreadPool_d.a in Frameworks */,
+				24889CCB281063EB00EA2BE4 /* libThreadPool_d.a in Frameworks */,
+				24889CCA281063E800EA2BE4 /* libFindPathEngine_d.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2A48DF00FCD80FAA2E5BF540 /* Products */ = {
+		24889CA42810620C00EA2BE4 = {
 			isa = PBXGroup;
 			children = (
-				59930A414F5AB2EBF8012081 /* libFindPathEngine_d.a */,
+				24889CBF281063CA00EA2BE4 /* ThreadPool.xcodeproj */,
+				24889CB9281063B700EA2BE4 /* FindPathEngine.xcodeproj */,
+				24889CB7281063AD00EA2BE4 /* main.cpp */,
+				24889CAE2810620C00EA2BE4 /* Products */,
+				24889CC9281063E800EA2BE4 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+			wrapsLines = 0;
+		};
+		24889CAE2810620C00EA2BE4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				24889CAD2810620C00EA2BE4 /* test */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		424BE1FC843147666716703C /* Frameworks */ = {
+		24889CBA281063B700EA2BE4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				06C3DD49D46D6D333B53FB89 /* Foundation.framework */,
+				24889CBE281063B700EA2BE4 /* libFindPathEngine_d.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		24889CC0281063CA00EA2BE4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				24889CC4281063CA00EA2BE4 /* libThreadPool_d.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		24889CC9281063E800EA2BE4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		4B6CB9F99386E4E3BA27B839 /* test */ = {
-			isa = PBXGroup;
-			children = (
-				6496DAD43919F1FEFACD0114 /* main.cpp */,
-			);
-			name = test;
-			sourceTree = "<group>";
-		};
-		544595F165C076DB88065431 /* test */ = {
-			isa = PBXGroup;
-			children = (
-				12D3AC85765B866F8BBE0AC5 /* Info.plist */,
-				4B6CB9F99386E4E3BA27B839 /* test */,
-				424BE1FC843147666716703C /* Frameworks */,
-				581EEAC54FB7EDAF2070E905 /* Projects */,
-				EA8E290FE2272BF9B2E0274F /* Products */,
-			);
-			name = test;
-			sourceTree = "<group>";
-		};
-		581EEAC54FB7EDAF2070E905 /* Projects */ = {
-			isa = PBXGroup;
-			children = (
-				A11EA37CE630A3A699D469BC /* FindPathEngine.xcodeproj */,
-				A987AEA6E5109FD05DB214E6 /* ThreadPool.xcodeproj */,
-			);
-			name = Projects;
-			sourceTree = "<group>";
-		};
-		C8C9BF8EE0972B388C4BB5CE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				14F44660B312200A9BDEFCA0 /* libThreadPool_d.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		EA8E290FE2272BF9B2E0274F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E942D732F469F3DCF0716D72 /* test_d.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		238D33D8CE8E634298220218 /* test */ = {
+		24889CAC2810620C00EA2BE4 /* test */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5E3FB372DCD1C61C1C5C09B2 /* Build configuration list for PBXNativeTarget "test" */;
+			buildConfigurationList = 24889CB42810620C00EA2BE4 /* Build configuration list for PBXNativeTarget "test" */;
 			buildPhases = (
-				03EE3C5382804EFDC20A9293 /* Resources */,
-				9DA3C40A1C35D6B45BC01A4A /* Sources */,
-				821D57B300AF6A5D4039ADF3 /* Frameworks */,
+				24889CA92810620C00EA2BE4 /* Sources */,
+				24889CAA2810620C00EA2BE4 /* Frameworks */,
+				24889CAB2810620C00EA2BE4 /* CopyFiles */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				CAADA9A99D3CDA53CEC0BFE9 /* PBXTargetDependency */,
-				692E8A3780FBF5E12CB08077 /* PBXTargetDependency */,
+				24889CC8281063D800EA2BE4 /* PBXTargetDependency */,
+				24889CC6281063D500EA2BE4 /* PBXTargetDependency */,
 			);
 			name = test;
-			productInstallPath = "$(HOME)/Applications";
 			productName = test;
-			productReference = E942D732F469F3DCF0716D72 /* test_d.app */;
-			productType = "com.apple.product-type.application";
+			productReference = 24889CAD2810620C00EA2BE4 /* test */;
+			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		08FB7793FE84155DC02AAC07 /* Project object */ = {
+		24889CA52810620C00EA2BE4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1330;
+				TargetAttributes = {
+					24889CAC2810620C00EA2BE4 = {
+						CreatedOnToolsVersion = 13.3.1;
+					};
+				};
 			};
-			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "test" */;
-			compatibilityVersion = "Xcode 3.2";
+			buildConfigurationList = 24889CA82810620C00EA2BE4 /* Build configuration list for PBXProject "test" */;
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
-			hasScannedForEncodings = 1;
+			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 				Base,
 			);
-			mainGroup = 544595F165C076DB88065431 /* test */;
+			mainGroup = 24889CA42810620C00EA2BE4;
+			productRefGroup = 24889CAE2810620C00EA2BE4 /* Products */;
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 2A48DF00FCD80FAA2E5BF540 /* Products */;
-					ProjectRef = A11EA37CE630A3A699D469BC /* FindPathEngine.xcodeproj */;
+					ProductGroup = 24889CBA281063B700EA2BE4 /* Products */;
+					ProjectRef = 24889CB9281063B700EA2BE4 /* FindPathEngine.xcodeproj */;
 				},
 				{
-					ProductGroup = C8C9BF8EE0972B388C4BB5CE /* Products */;
-					ProjectRef = A987AEA6E5109FD05DB214E6 /* ThreadPool.xcodeproj */;
+					ProductGroup = 24889CC0281063CA00EA2BE4 /* Products */;
+					ProjectRef = 24889CBF281063CA00EA2BE4 /* ThreadPool.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
-				238D33D8CE8E634298220218 /* test */,
+				24889CAC2810620C00EA2BE4 /* test */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		14F44660B312200A9BDEFCA0 /* libThreadPool_d.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libThreadPool_d.a;
-			remoteRef = 501C08CE6196E9B883DCC70E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		59930A414F5AB2EBF8012081 /* libFindPathEngine_d.a */ = {
+		24889CBE281063B700EA2BE4 /* libFindPathEngine_d.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libFindPathEngine_d.a;
-			remoteRef = E17F168005F45C6A67F4F4C0 /* PBXContainerItemProxy */;
+			remoteRef = 24889CBD281063B700EA2BE4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		24889CC4281063CA00EA2BE4 /* libThreadPool_d.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libThreadPool_d.a;
+			remoteRef = 24889CC3281063CA00EA2BE4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
 
-/* Begin PBXResourcesBuildPhase section */
-		03EE3C5382804EFDC20A9293 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXResourcesBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		9DA3C40A1C35D6B45BC01A4A /* Sources */ = {
+		24889CA92810620C00EA2BE4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A4D60D6760424404136AF16 /* main.cpp in Sources */,
+				24889CB8281063AD00EA2BE4 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		692E8A3780FBF5E12CB08077 /* PBXTargetDependency */ = {
+		24889CC6281063D500EA2BE4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = ThreadPool;
-			targetProxy = 67930307790DE3F19B53C147 /* PBXContainerItemProxy */;
+			targetProxy = 24889CC5281063D500EA2BE4 /* PBXContainerItemProxy */;
 		};
-		CAADA9A99D3CDA53CEC0BFE9 /* PBXTargetDependency */ = {
+		24889CC8281063D800EA2BE4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FindPathEngine;
-			targetProxy = F8F610B91D6B56A37F6BEEF9 /* PBXContainerItemProxy */;
+			targetProxy = 24889CC7281063D800EA2BE4 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1D80138988E178B3D40AF9C9 /* Debug */ = {
+		24889CB22810620C00EA2BE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
-				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				COMMON_HEADER_SEARCH_PATHS = "../../../include ../../../../ThreadPool/include ../../../../MemoryLeaksTracker/include";
-				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
-				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = c11;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
-				GCC_MODEL_TUNING = G5;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
-					_DEBUG,
-					_SCL_SECURE_NO_WARNINGS,
-					_CRT_SECURE_NO_WARNINGS,
-					_WINSOCK_DEPRECATED_NO_WARNINGS,
+					"DEBUG=1",
+					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = NO;
-				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = "$(COMMON_HEADER_SEARCH_PATHS)";
-				INSTALL_PATH = "\"$(HOME)/Applications\"";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = ../../../lib/xcode4/ios;
-				OBJROOT = obj/Debug/test;
-				ONLY_ACTIVE_ARCH = NO;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
-				SYMROOT = ../../../build/xcode4/ios;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
 			};
 			name = Debug;
 		};
-		2584D458C303A8C25856C298 /* Release */ = {
+		24889CB32810620C00EA2BE4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
-				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
-				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				COMMON_HEADER_SEARCH_PATHS = "../../../include ../../../../ThreadPool/include ../../../../MemoryLeaksTracker/include";
-				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
-				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = c11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
-				GCC_MODEL_TUNING = G5;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					NDEBUG,
-					"_SECURE_SCL=0",
-					"_SECURE_SCL_THROWS=0",
-					_SCL_SECURE_NO_WARNINGS,
-					_CRT_SECURE_NO_WARNINGS,
-					_WINSOCK_DEPRECATED_NO_WARNINGS,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = NO;
-				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = "$(COMMON_HEADER_SEARCH_PATHS)";
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "\"$(HOME)/Applications\"";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = ../../../lib/xcode4/macos;
-				OBJROOT = obj/Release/test;
-				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = test;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
-				SYMROOT = ../../../build/xcode4/macos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "";
+				MACOSX_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
 			};
 			name = Release;
 		};
-		A5E8C35E15F3754892EA219E /* Debug */ = {
+		24889CB52810620C00EA2BE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
-				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				COMMON_HEADER_SEARCH_PATHS = "../../../include ../../../../ThreadPool/include ../../../../MemoryLeaksTracker/include";
-				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
-				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
-				COPY_PHASE_STRIP = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = c11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					_DEBUG,
-					_SCL_SECURE_NO_WARNINGS,
-					_CRT_SECURE_NO_WARNINGS,
-					_WINSOCK_DEPRECATED_NO_WARNINGS,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = NO;
-				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = "$(COMMON_HEADER_SEARCH_PATHS)";
-				INFOPLIST_FILE = Info.plist;
-				INSTALL_PATH = "\"$(HOME)/Applications\"";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = ../../../lib/xcode4/macos;
-				OBJROOT = obj/Debug/test;
-				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_NAME = test_d;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
-				SYMROOT = ../../../build/xcode4/macos;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BR67ND9EV8;
+				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = ../../../include;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
-		EC36A9C3B586016D71142003 /* Release */ = {
+		24889CB62810620C00EA2BE4 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
-				CLANG_CXX_LANGUAGE_STANDARD = "c++11";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				COMMON_HEADER_SEARCH_PATHS = "../../../include ../../../../ThreadPool/include ../../../../MemoryLeaksTracker/include";
-				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
-				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
-				COPY_PHASE_STRIP = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = c11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_CPP_EXCEPTIONS = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
-				GCC_MODEL_TUNING = G5;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					NDEBUG,
-					"_SECURE_SCL=0",
-					"_SECURE_SCL_THROWS=0",
-					_SCL_SECURE_NO_WARNINGS,
-					_CRT_SECURE_NO_WARNINGS,
-					_WINSOCK_DEPRECATED_NO_WARNINGS,
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_CHECK_SWITCH_STATEMENTS = NO;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = NO;
-				GCC_WARN_UNUSED_VARIABLE = NO;
-				HEADER_SEARCH_PATHS = "$(COMMON_HEADER_SEARCH_PATHS)";
-				INSTALL_PATH = "\"$(HOME)/Applications\"";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				LIBRARY_SEARCH_PATHS = ../../../lib/xcode4/ios;
-				OBJROOT = obj/Release/test;
-				ONLY_ACTIVE_ARCH = NO;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = static;
-				SYMROOT = ../../../build/xcode4/ios;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALID_ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = BR67ND9EV8;
+				ENABLE_HARDENED_RUNTIME = YES;
+				HEADER_SEARCH_PATHS = ../../../include;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "test" */ = {
+		24889CA82810620C00EA2BE4 /* Build configuration list for PBXProject "test" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				1D80138988E178B3D40AF9C9 /* Debug */,
-				EC36A9C3B586016D71142003 /* Release */,
+				24889CB22810620C00EA2BE4 /* Debug */,
+				24889CB32810620C00EA2BE4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
-		5E3FB372DCD1C61C1C5C09B2 /* Build configuration list for PBXNativeTarget "test" */ = {
+		24889CB42810620C00EA2BE4 /* Build configuration list for PBXNativeTarget "test" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				A5E8C35E15F3754892EA219E /* Debug */,
-				2584D458C303A8C25856C298 /* Release */,
+				24889CB52810620C00EA2BE4 /* Debug */,
+				24889CB62810620C00EA2BE4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+	rootObject = 24889CA52810620C00EA2BE4 /* Project object */;
 }

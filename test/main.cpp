@@ -1,9 +1,10 @@
 // ConsoleApplication1.cpp : Defines the entry point for the console application.
 //
 
-#include "MemoryLeaksTracker/MemoryLT.h"
+//#include "MemoryLeaksTracker/MemoryLT.h"
 #include "FindPathEngine/FindPathEngine.h"
 
+#include <cmath>
 
 
 class NavMesh : public fpe::NavMeshBase
@@ -122,7 +123,7 @@ std::vector<unsigned int> NavMesh::GetNeighbors(unsigned int nodeIndex)
 
 int main(int argc, char* argv[])
 {
-	std::shared_ptr<NavMesh> navmesh = std::shared_ptr<NavMesh>(NEW NavMesh());
+	std::shared_ptr<NavMesh> navmesh = std::shared_ptr<NavMesh>(new NavMesh());
 
 	std::shared_ptr<fpe::FindPathEngine> engine = std::make_shared<fpe::FindPathEngine>(navmesh, 2);
     std::shared_ptr<fpe::Ticket> ticket = nullptr;
